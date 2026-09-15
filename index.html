@@ -47,6 +47,7 @@
   html{scroll-behavior:smooth;}
   body{
     margin:0;
+    overflow-x:hidden;
     background:var(--paper);
     color:var(--ink);
     font-family:"Source Sans 3", system-ui, sans-serif;
@@ -61,10 +62,19 @@
     margin:0;
   }
   .mono{ font-family:"IBM Plex Mono", monospace; }
-  a{ color:inherit; }
-  img{ max-width:100%; }
+  a{ color:var(--orange); text-decoration:none; }
+  a:hover{ color:var(--orange-deep); }
+  img{ max-width:100%; display:block; }
+  svg{ display:block; }
   .side-pad{ padding-inline:20px; }
   .wrap{ max-width:1080px; margin:0 auto; }
+
+  /* subtle paper texture so flat sections read as material, not flat color */
+  .textured{
+    background-image: radial-gradient(rgba(27,34,42,.05) 1px, transparent 1px);
+    background-size: 18px 18px;
+    background-position: -4px -4px;
+  }
 
   /* nav */
   header.nav{
@@ -73,14 +83,11 @@
     border-bottom:1px solid var(--line);
   }
   .nav-inner{
-    max-width:1080px; margin:0 auto; padding:14px 20px;
+    max-width:1080px; margin:0 auto; padding:12px 20px;
     display:flex; align-items:center; justify-content:space-between;
   }
-  .brand{ display:flex; align-items:center; gap:9px; font-family:"Barlow Condensed",sans-serif; font-weight:700; font-size:1.4rem; color:var(--navy); text-decoration:none; }
-  .brand .mark{
-    width:30px; height:30px; border-radius:8px; background:var(--navy);
-    display:flex; align-items:center; justify-content:center; font-size:1rem; color:var(--orange);
-  }
+  .brand{ display:flex; align-items:center; gap:10px; font-family:"Barlow Condensed",sans-serif; font-weight:700; font-size:1.4rem; color:var(--navy); text-decoration:none; }
+  .brand .mark{ width:34px; height:34px; border-radius:9px; display:block; box-shadow:0 3px 8px rgba(27,34,42,.22); }
   .nav-links{ display:flex; gap:28px; font-size:.95rem; }
   .nav-links a{ text-decoration:none; color:var(--ink-soft); }
   .nav-links a:hover{ color:var(--navy); }
@@ -91,7 +98,7 @@
     text-decoration:none; border:1px solid transparent; cursor:pointer;
     font-family:"Source Sans 3",sans-serif;
   }
-  .btn-primary{ background:var(--orange); color:#fff; }
+  .btn-primary{ background:var(--orange); color:#fff; box-shadow:0 10px 22px -8px rgba(227,90,15,.55); }
   .btn-primary:hover{ background:var(--orange-deep); }
   .btn-ghost{ background:transparent; color:var(--navy); border-color:var(--navy); }
   .btn-ghost:hover{ background:var(--navy); color:#fff; }
@@ -100,15 +107,19 @@
 
   /* hero */
   .hero{
+    position:relative;
+    overflow:hidden;
     background:
       repeating-linear-gradient(0deg, rgba(255,255,255,.045) 0 1px, transparent 1px 44px),
       repeating-linear-gradient(90deg, rgba(255,255,255,.045) 0 1px, transparent 1px 44px),
       radial-gradient(ellipse at 20% -10%, rgba(227,90,15,.20), transparent 55%),
+      radial-gradient(ellipse at 100% 100%, rgba(227,90,15,.10), transparent 45%),
       var(--navy);
     color:#fff;
     padding:76px 20px 90px;
   }
   .hero-inner{
+    position:relative; z-index:1;
     max-width:1080px; margin:0 auto;
     display:grid; grid-template-columns:1.05fr .95fr; gap:48px; align-items:center;
   }
@@ -124,28 +135,69 @@
   .hero h1 u{ text-decoration:none; color:var(--orange); }
   .hero p.lead{ font-size:1.15rem; color:#C6CCD2; max-width:46ch; margin:0 0 30px; }
   .hero .ctas{ display:flex; gap:14px; flex-wrap:wrap; }
+  .hero-note{ display:flex; align-items:center; gap:8px; margin:22px 0 0; font-size:.8rem; color:#9FA9B2; letter-spacing:.3px; }
+  .hero-note svg{ color:#9FA9B2; flex-shrink:0; }
 
-  /* novedad card mock */
-  .mock{
-    background:var(--card); color:var(--ink); border-radius:16px; padding:0;
-    box-shadow:0 30px 60px -20px rgba(0,0,0,.5); overflow:hidden;
-    border:1px solid rgba(255,255,255,.08);
+  /* hero visual: real photo, layered with a real device mock */
+  .hero-visual{ position:relative; }
+  .hero-photo-frame{
+    position:relative; border-radius:20px; overflow:hidden;
+    box-shadow:0 40px 70px -24px rgba(0,0,0,.65), 0 1px 0 rgba(255,255,255,.06) inset;
+    border:1px solid rgba(255,255,255,.10);
+    aspect-ratio:4/5;
   }
-  .mock-top{ background:var(--navy-deep); color:#fff; padding:14px 18px; display:flex; justify-content:space-between; align-items:center; font-family:"IBM Plex Mono",monospace; font-size:.75rem; }
-  .mock-photo{ height:150px; background:linear-gradient(135deg,#2E3944,#1B222A); position:relative; }
-  .mock-photo::after{
-    content:"📷 Foto de la novedad"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-    color:#7C8894; font-family:"IBM Plex Mono",monospace; font-size:.78rem; letter-spacing:.4px;
+  .hero-photo-frame img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .hero-photo-frame::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(27,34,42,0) 40%, rgba(27,34,42,.86) 100%);
   }
-  .mock-body{ padding:18px 18px 20px; }
-  .mock-body h4{ font-size:1.15rem; margin-bottom:4px; }
-  .mock-body p{ margin:0 0 14px; color:var(--ink-soft); font-size:.9rem; }
-  .mock-row{ display:flex; justify-content:space-between; align-items:center; padding-top:12px; border-top:1px dashed var(--line); }
-  .avatar-chip{ display:flex; align-items:center; gap:8px; font-size:.85rem; font-weight:600; }
-  .avatar-chip .dot{ width:26px; height:26px; border-radius:50%; background:var(--navy); color:#fff; display:flex; align-items:center; justify-content:center; font-size:.75rem; }
-  .badge{ font-family:"IBM Plex Mono",monospace; font-size:.68rem; text-transform:uppercase; letter-spacing:.4px; padding:4px 10px; border-radius:999px; }
-  .badge.urgente{ background:#FBE4D8; color:var(--orange-deep); }
-  .badge.resuelta{ background:#DDEFE9; color:#1F6E5C; }
+  .hero-photo-tag{
+    position:absolute; top:16px; left:16px; z-index:2;
+    display:flex; align-items:center; gap:7px;
+    background:rgba(27,34,42,.55); backdrop-filter:blur(4px);
+    border:1px solid rgba(255,255,255,.18);
+    padding:6px 12px; border-radius:999px;
+    font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.5px; text-transform:uppercase; color:#fff;
+  }
+  .hero-photo-tag .dot{ width:6px; height:6px; border-radius:50%; background:#5ED9A6; box-shadow:0 0 0 3px rgba(94,217,166,.25); }
+
+  /* phone mock: real app screenshot, framed like an actual device */
+  .phone-mock{
+    position:absolute; z-index:3;
+    width:47%; left:-9%; bottom:-8%;
+    filter:drop-shadow(0 30px 38px rgba(0,0,0,.55));
+  }
+  .phone-shell{
+    position:relative;
+    background:#1A1D21;
+    border-radius:11% / 4.8%;
+    padding:2.6% 2.2%;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.08), inset 0 0 0 3px #0E1013;
+  }
+  .phone-shell::before, .phone-shell::after{
+    content:""; position:absolute; background:#0E1013; border-radius:2px;
+  }
+  .phone-shell::before{ /* power button */
+    right:-2px; top:16%; width:3px; height:7%;
+  }
+  .phone-shell::after{ /* volume buttons */
+    left:-2px; top:12%; width:3px; height:11%;
+    box-shadow:0 13% 0 0 #0E1013;
+  }
+  .phone-screen{
+    position:relative; overflow:hidden; border-radius:9% / 3.6%;
+    background:#000;
+  }
+  .phone-screen img{ width:100%; display:block; }
+  .phone-cam{
+    position:absolute; top:2.2%; left:50%; transform:translateX(-50%);
+    width:3.4%; aspect-ratio:1; border-radius:50%;
+    background:#050607; box-shadow:0 0 0 1px rgba(255,255,255,.06);
+    z-index:2;
+  }
+  @media (max-width:860px){
+    .phone-mock{ width:42%; left:-4%; bottom:-5%; }
+  }
 
   /* sections */
   section{ padding:80px 20px; }
@@ -160,18 +212,24 @@
   /* pains */
   .pains{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
   @media (max-width:760px){ .pains{ grid-template-columns:1fr; } }
-  .pain{ background:var(--card); border:1px solid var(--line); border-radius:14px; padding:26px; }
+  .pain{ background:var(--card); border:1px solid var(--line); border-radius:14px; padding:26px; box-shadow:0 14px 30px -20px rgba(27,34,42,.35); }
   .pain .num{ font-family:"Barlow Condensed",sans-serif; font-weight:700; font-size:2.2rem; color:var(--line); margin-bottom:6px; }
   .pain h3{ font-size:1.2rem; margin-bottom:8px; }
   .pain p{ color:var(--ink-soft); font-size:.94rem; margin:0; }
 
   /* how it works — navy band */
-  .band-navy{ background:var(--navy); color:#fff; }
+  .band-navy{ position:relative; background:var(--navy); color:#fff; overflow:hidden; }
+  .band-navy::before{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(ellipse at 90% 0%, rgba(227,90,15,.14), transparent 50%);
+    pointer-events:none;
+  }
+  .band-navy .wrap{ position:relative; }
   .band-navy .kicker{ color:var(--orange); }
   .band-navy p.section-lead{ color:#B9C1C8; }
-  .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; counter-reset:step; }
+  .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
   @media (max-width:760px){ .steps{ grid-template-columns:1fr; } }
-  .step{ position:relative; padding-left:0; }
+  .step{ position:relative; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.10); border-radius:14px; padding:24px; }
   .step .stepnum{
     font-family:"Barlow Condensed",sans-serif; font-weight:700; font-size:1.1rem;
     width:38px; height:38px; border-radius:50%; border:2px solid var(--orange); color:var(--orange);
@@ -183,28 +241,32 @@
   /* audiences */
   .audiences{ display:grid; grid-template-columns:1fr 1fr; gap:26px; }
   @media (max-width:760px){ .audiences{ grid-template-columns:1fr; } }
-  .aud-card{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:30px; }
+  .aud-card{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:30px; box-shadow:0 18px 36px -22px rgba(27,34,42,.4); }
   .aud-card .tag{ font-family:"IBM Plex Mono",monospace; font-size:.72rem; text-transform:uppercase; letter-spacing:.5px; color:var(--orange); }
   .aud-card h3{ font-size:1.55rem; margin:8px 0 14px; }
-  .aud-card ul{ list-style:none; padding:0; margin:0 0 18px; display:grid; gap:10px; }
-  .aud-card li{ display:flex; gap:10px; font-size:.94rem; color:var(--ink); }
-  .aud-card li::before{ content:"✓"; color:var(--orange); font-weight:700; flex-shrink:0; }
+  .aud-card ul{ list-style:none; padding:0; margin:0 0 18px; display:grid; gap:12px; }
+  .aud-card li{ display:flex; align-items:flex-start; gap:10px; font-size:.94rem; color:var(--ink); }
+  .aud-card li svg{ color:var(--orange); flex-shrink:0; margin-top:2px; }
   .aud-card .roles{ font-size:.85rem; color:var(--ink-soft); border-top:1px dashed var(--line); padding-top:14px; }
 
   /* features grid */
   .features{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
   @media (max-width:760px){ .features{ grid-template-columns:1fr 1fr; } }
   @media (max-width:480px){ .features{ grid-template-columns:1fr; } }
-  .feature{ padding:22px; border-radius:14px; background:var(--card); border:1px solid var(--line); }
-  .feature .ico{ font-size:1.5rem; margin-bottom:10px; display:block; }
+  .feature{ padding:22px; border-radius:14px; background:var(--card); border:1px solid var(--line); box-shadow:0 14px 30px -22px rgba(27,34,42,.35); }
+  .feature .ico-tile{
+    width:40px; height:40px; border-radius:10px; margin-bottom:14px;
+    background:var(--paper); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; color:var(--orange);
+  }
   .feature h4{ font-size:1.05rem; margin-bottom:6px; }
   .feature p{ margin:0; color:var(--ink-soft); font-size:.88rem; }
 
   /* pricing */
   .pricing{ display:grid; grid-template-columns:1fr 1fr; gap:24px; max-width:760px; margin:0 auto; }
   @media (max-width:640px){ .pricing{ grid-template-columns:1fr; } }
-  .plan{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:30px; }
-  .plan.pro{ border:2px solid var(--orange); position:relative; }
+  .plan{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:30px; box-shadow:0 16px 34px -24px rgba(27,34,42,.4); }
+  .plan.pro{ border:2px solid var(--orange); position:relative; box-shadow:0 22px 44px -20px rgba(227,90,15,.35); }
   .plan.pro::before{
     content:"Recomendado"; position:absolute; top:-13px; right:24px;
     background:var(--orange); color:#fff; font-family:"IBM Plex Mono",monospace; font-size:.68rem;
@@ -213,12 +275,18 @@
   .plan h3{ font-size:1.3rem; margin-bottom:4px; }
   .plan .price{ font-family:"Barlow Condensed",sans-serif; font-weight:700; font-size:2.4rem; margin:10px 0 4px; font-variant-numeric:tabular-nums; }
   .plan .price span{ font-family:"Source Sans 3",sans-serif; font-weight:400; font-size:1rem; color:var(--ink-soft); }
-  .plan ul{ list-style:none; padding:0; margin:18px 0 22px; display:grid; gap:9px; }
-  .plan li{ display:flex; gap:10px; font-size:.92rem; }
-  .plan li::before{ content:"✓"; color:var(--orange); font-weight:700; }
+  .plan ul{ list-style:none; padding:0; margin:18px 0 22px; display:grid; gap:10px; }
+  .plan li{ display:flex; align-items:flex-start; gap:10px; font-size:.92rem; }
+  .plan li svg{ color:var(--orange); flex-shrink:0; margin-top:2px; }
 
   /* final cta */
-  .cta-final{ background:var(--navy); color:#fff; text-align:center; padding:90px 20px; }
+  .cta-final{ position:relative; overflow:hidden; background:var(--navy); color:#fff; text-align:center; padding:90px 20px; }
+  .cta-final::before{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(ellipse at 50% 120%, rgba(227,90,15,.22), transparent 60%);
+    pointer-events:none;
+  }
+  .cta-final *{ position:relative; }
   .cta-final h2{ color:#fff; font-size:clamp(1.9rem,4vw,2.6rem); margin-bottom:14px; }
   .cta-final p{ color:#C6CCD2; max-width:50ch; margin:0 auto 30px; font-size:1.05rem; }
 
@@ -232,9 +300,22 @@
 </head>
 <body>
 
+<svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <defs>
+    <symbol id="ic-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.73 21a2 2 0 0 1-3.46 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="ic-offline" viewBox="0 0 24 24"><path d="M8.5 16.5a5 5 0 0 1 7 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 12.5a10 10 0 0 1 8-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.5 9.5A10 10 0 0 1 19 12.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 3l18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="20" r="1.1" fill="currentColor"/></symbol>
+    <symbol id="ic-file" viewBox="0 0 24 24"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 3v5h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 13h6M9 17h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="ic-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5 11a7 7 0 0 0 14 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 18v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M9 21h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="ic-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M16 4.3a3.2 3.2 0 0 1 0 6.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M15 14c2.8.4 5 2.8 5 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="ic-building" viewBox="0 0 24 24"><rect x="4" y="3" width="11" height="18" rx="1" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M15 9h5v12h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7.5 7h1M11 7h1M7.5 11h1M11 11h1M7.5 15h1M11 15h1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="ic-check" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="ic-phone" viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M10.5 18.3h3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+
 <header class="nav">
   <div class="nav-inner">
-    <a class="brand" href="#top"><span class="mark">🦺</span>Fixgo</a>
+    <a class="brand" href="#top"><img class="mark" src="/logo-mark.png" alt="Fixgo" width="34" height="34">Fixgo</a>
     <nav class="nav-links">
       <a href="#como-funciona">Cómo funciona</a>
       <a href="#para-quien">Para quién es</a>
@@ -255,17 +336,22 @@
         <a class="btn btn-primary" href="mailto:soporte@fixgo.ar?subject=Quiero%20probar%20Fixgo&body=Hola%2C%20quiero%20sumarme%20para%20probar%20Fixgo.%0D%0AMi%20obra%20o%20edificio%3A%20%0D%0AMi%20rol%3A%20">Quiero probarla</a>
         <a class="btn btn-on-navy" href="#como-funciona">Ver cómo funciona ↓</a>
       </div>
-      <p class="mono" style="margin:20px 0 0; font-size:.8rem; color:#9FA9B2; letter-spacing:.3px;">📱 Android, en Google Play · iOS, próximamente</p>
+      <p class="hero-note mono">
+        <svg width="15" height="15"><use href="#ic-phone"/></svg>
+        Android, en Google Play · iOS, próximamente
+      </p>
     </div>
-    <div class="mock">
-      <div class="mock-top"><span>OBRA · CASA ADAMO</span><span>NOVEDAD #14</span></div>
-      <div class="mock-photo"></div>
-      <div class="mock-body">
-        <h4>Fisura en muro medianero</h4>
-        <p>Reportada por el capataz — pared sur, planta baja</p>
-        <div class="mock-row">
-          <div class="avatar-chip"><span class="dot">JM</span> Asignada a Juan (albañil)</div>
-          <span class="badge urgente">Urgente</span>
+    <div class="hero-visual">
+      <div class="hero-photo-frame">
+        <img src="/hero-photo.jpg" alt="Capataz revisando el estado de la obra desde la app Fixgo en una tablet">
+        <span class="hero-photo-tag"><span class="dot"></span>En obra, ahora mismo</span>
+      </div>
+      <div class="phone-mock">
+        <div class="phone-shell">
+          <div class="phone-screen">
+            <span class="phone-cam"></span>
+            <img src="/phone-screenshot.jpg" alt="Captura real de la app Fixgo: novedad 'Revocar con hidrófugo', urgente, asignada al albañil">
+          </div>
         </div>
       </div>
     </div>
@@ -291,7 +377,7 @@
       <div class="pain">
         <p class="num">03</p>
         <h3>No queda registro</h3>
-        <p>Se resuelve, pero nadie avisa — y a la hora de armar el informe para el cliente o el consorcio, no está.</p>
+        <p>Se resuelve, pero nadie avisa — y a la hora de armar el informe, no hay registro de qué pasó ni quién lo solucionó.</p>
       </div>
     </div>
   </div>
@@ -332,9 +418,9 @@
         <p class="tag">Obra</p>
         <h3>Para tu obra en construcción</h3>
         <ul>
-          <li>Seguí el estado real de cada obra, estés donde estés</li>
-          <li>Cada novedad con foto, responsable y estado, visible para todo el equipo</li>
-          <li>Informe ejecutivo en PDF, con el estado real de la obra</li>
+          <li><svg width="18" height="18"><use href="#ic-check"/></svg>Seguí el estado real de cada obra, estés donde estés</li>
+          <li><svg width="18" height="18"><use href="#ic-check"/></svg>Cada novedad con foto, responsable y estado, visible para todo el equipo</li>
+          <li><svg width="18" height="18"><use href="#ic-check"/></svg>Informe ejecutivo en PDF, con el estado real de la obra</li>
         </ul>
         <p class="roles">Profesional (director de obra) · Capataz / sobrestante · Operario</p>
       </div>
@@ -342,9 +428,9 @@
         <p class="tag">Consorcio</p>
         <h3>Para el mantenimiento de tu edificio</h3>
         <ul>
-          <li>Todos los reclamos de tus edificios, sin perseguir a nadie por teléfono</li>
-          <li>Cada reclamo con foto y a quién se lo asignaste, en un solo lugar</li>
-          <li>Rendile cuentas al consejo de propietarios sin armar una planilla a mano</li>
+          <li><svg width="18" height="18"><use href="#ic-check"/></svg>Todos los reclamos de tus edificios, sin perseguir a nadie por teléfono</li>
+          <li><svg width="18" height="18"><use href="#ic-check"/></svg>Cada reclamo con foto y a quién se lo asignaste, en un solo lugar</li>
+          <li><svg width="18" height="18"><use href="#ic-check"/></svg>Rendile cuentas al consejo de propietarios sin armar una planilla a mano</li>
         </ul>
         <p class="roles">Administrador de consorcio · Encargado / portero · Proveedor de mantenimiento</p>
       </div>
@@ -352,17 +438,17 @@
   </div>
 </section>
 
-<section class="tight" style="background:var(--card); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+<section class="tight textured" style="background:var(--card); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
   <div class="wrap">
     <p class="kicker">Funciones</p>
     <h2 class="section-title">Todo lo que necesitás, nada que no uses</h2>
     <div class="features" style="margin-top:30px;">
-      <div class="feature"><span class="ico">🔔</span><h4>Notificaciones reales</h4><p>Comentario, asignación, equipo y vencimientos — al instante.</p></div>
-      <div class="feature"><span class="ico">📶</span><h4>Modo sin conexión</h4><p>Cargás la novedad sin señal; se sincroniza sola al volver a tener datos.</p></div>
-      <div class="feature"><span class="ico">📄</span><h4>Informe ejecutivo</h4><p>Un PDF prolijo, listo para presentar en la obra o en el consejo de propietarios.</p></div>
-      <div class="feature"><span class="ico">🎙️</span><h4>Fotos y voz</h4><p>Comentarios con foto o mensaje de voz — como en el chat, pero ordenado.</p></div>
-      <div class="feature"><span class="ico">👥</span><h4>Equipo con roles</h4><p>Cada persona ve lo que le corresponde según su rol.</p></div>
-      <div class="feature"><span class="ico">🏢</span><h4>Multi-obra ilimitada</h4><p>Todos tus proyectos o edificios, en una sola cuenta Pro.</p></div>
+      <div class="feature"><div class="ico-tile"><svg width="20" height="20"><use href="#ic-bell"/></svg></div><h4>Notificaciones reales</h4><p>Comentario, asignación, equipo y vencimientos — al instante.</p></div>
+      <div class="feature"><div class="ico-tile"><svg width="20" height="20"><use href="#ic-offline"/></svg></div><h4>Modo sin conexión</h4><p>Cargás la novedad sin señal; se sincroniza sola al volver a tener datos.</p></div>
+      <div class="feature"><div class="ico-tile"><svg width="20" height="20"><use href="#ic-file"/></svg></div><h4>Informe ejecutivo</h4><p>Un PDF prolijo, listo para presentar en la obra o en el consejo de propietarios.</p></div>
+      <div class="feature"><div class="ico-tile"><svg width="20" height="20"><use href="#ic-mic"/></svg></div><h4>Fotos y voz</h4><p>Comentarios con foto o mensaje de voz — como en el chat, pero ordenado.</p></div>
+      <div class="feature"><div class="ico-tile"><svg width="20" height="20"><use href="#ic-users"/></svg></div><h4>Equipo con roles</h4><p>Cada persona ve lo que le corresponde según su rol.</p></div>
+      <div class="feature"><div class="ico-tile"><svg width="20" height="20"><use href="#ic-building"/></svg></div><h4>Multi-obra ilimitada</h4><p>Todos tus proyectos o edificios, en una sola cuenta Pro.</p></div>
     </div>
   </div>
 </section>
@@ -377,9 +463,9 @@
         <h3>Gratuito</h3>
         <p class="price mono">$0</p>
         <ul>
-          <li>1 obra o edificio activo</li>
-          <li>Novedades con foto y responsable</li>
-          <li>Equipo sin límite de integrantes</li>
+          <li><svg width="16" height="16"><use href="#ic-check"/></svg>1 obra o edificio activo</li>
+          <li><svg width="16" height="16"><use href="#ic-check"/></svg>Novedades con foto y responsable</li>
+          <li><svg width="16" height="16"><use href="#ic-check"/></svg>Equipo sin límite de integrantes</li>
         </ul>
         <a class="btn btn-ghost" style="width:100%;" href="mailto:soporte@fixgo.ar?subject=Quiero%20probar%20Fixgo&body=Hola%2C%20quiero%20sumarme%20para%20probar%20Fixgo.%0D%0AMi%20obra%20o%20edificio%3A%20%0D%0AMi%20rol%3A%20">Quiero probarla</a>
       </div>
@@ -387,10 +473,10 @@
         <h3>Pro</h3>
         <p class="price mono">USD 14,99<span>/mes</span></p>
         <ul>
-          <li>Obras o edificios ilimitados</li>
-          <li>Modo sin conexión</li>
-          <li>Informe ejecutivo en PDF</li>
-          <li>Dibujo sobre fotos + Estudio</li>
+          <li><svg width="16" height="16"><use href="#ic-check"/></svg>Obras o edificios ilimitados</li>
+          <li><svg width="16" height="16"><use href="#ic-check"/></svg>Modo sin conexión</li>
+          <li><svg width="16" height="16"><use href="#ic-check"/></svg>Informe ejecutivo en PDF</li>
+          <li><svg width="16" height="16"><use href="#ic-check"/></svg>Dibujo sobre fotos + Estudio</li>
         </ul>
         <a class="btn btn-primary" style="width:100%;" href="mailto:soporte@fixgo.ar?subject=Me%20interesa%20Fixgo%20Pro&body=Hola%2C%20me%20interesa%20Fixgo%20Pro.%0D%0AMi%20obra%20o%20edificio%3A%20%0D%0ACu%C3%A1ntas%20obras%2Fedificios%20manejo%3A%20">Quiero Pro</a>
       </div>
@@ -407,7 +493,7 @@
 <footer>
   <div class="foot-inner">
     <div>
-      <a class="brand" href="#top"><span class="mark">🦺</span>Fixgo</a>
+      <a class="brand" href="#top"><img class="mark" src="/logo-mark.png" alt="Fixgo" width="34" height="34">Fixgo</a>
       <p class="foot-copy">© 2026 Fixgo. Coordiná tu obra o tu edificio.</p>
     </div>
     <div class="foot-links">
