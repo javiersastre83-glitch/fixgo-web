@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fixgo — Muy pronto en Google Play</title>
+<meta name="description" content="Fixgo está terminando su ingreso a Google Play. Dejanos tu mail y te avisamos apenas esté disponible para descargar.">
+<link rel="canonical" href="https://www.fixgo.ar/proximamente.html">
+<meta name="theme-color" content="#27313C">
+<meta name="robots" content="noindex">
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root{
+    --navy:#27313C;
+    --navy-deep:#1B222A;
+    --orange:#E35A0F;
+    --orange-deep:#C24A08;
+    --paper:#F4F5F3;
+    --ink:#1B222A;
+    --ink-soft:#5A6672;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; min-height:100vh;
+    display:flex; align-items:center; justify-content:center;
+    background:
+      repeating-linear-gradient(0deg, rgba(255,255,255,.045) 0 1px, transparent 1px 44px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.045) 0 1px, transparent 1px 44px),
+      radial-gradient(ellipse at 20% -10%, rgba(227,90,15,.22), transparent 55%),
+      radial-gradient(ellipse at 100% 100%, rgba(227,90,15,.12), transparent 45%),
+      var(--navy);
+    color:#fff;
+    font-family:"Source Sans 3", system-ui, sans-serif;
+    padding:32px 20px;
+  }
+  .card{
+    max-width:480px; width:100%; text-align:center;
+  }
+  .mark{
+    width:64px; height:64px; border-radius:16px; margin:0 auto 28px;
+    box-shadow:0 12px 28px -8px rgba(0,0,0,.5);
+  }
+  .eyebrow{
+    font-family:"IBM Plex Mono",monospace; font-size:.78rem; letter-spacing:1.6px; text-transform:uppercase;
+    color:var(--orange); margin:0 0 14px; display:flex; align-items:center; justify-content:center; gap:8px;
+  }
+  .eyebrow::before, .eyebrow::after{ content:""; width:22px; height:2px; background:var(--orange); display:inline-block; }
+  h1{
+    font-family:"Barlow Condensed", system-ui, sans-serif; font-weight:700;
+    font-size:clamp(2rem, 6vw, 2.7rem); line-height:1.05; color:#fff; margin:0 0 16px;
+    text-wrap:balance;
+  }
+  p.lead{
+    font-size:1.05rem; color:#C6CCD2; margin:0 0 34px; line-height:1.6;
+  }
+  .badge-row{ margin:0 0 30px; }
+  .badge-row img{ height:58px; width:auto; opacity:.55; filter:grayscale(.15); }
+  .badge-note{
+    font-family:"IBM Plex Mono",monospace; font-size:.7rem; letter-spacing:.4px; text-transform:uppercase;
+    color:#8892A0; margin:12px 0 0;
+  }
+  .notify{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:13px 26px; border-radius:8px; font-weight:600; font-size:.95rem;
+    text-decoration:none; background:var(--orange); color:#fff;
+    box-shadow:0 10px 22px -8px rgba(227,90,15,.55);
+  }
+  .notify:hover{ background:var(--orange-deep); }
+  .back{
+    display:block; margin-top:26px; font-size:.88rem; color:#9FA9B2; text-decoration:none;
+  }
+  .back:hover{ color:#fff; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <img class="mark" src="/logo-mark.png" alt="Fixgo">
+    <p class="eyebrow">Google Play</p>
+    <h1>Muy pronto vas a poder descargarla</h1>
+    <p class="lead">Fixgo está en los últimos pasos para publicarse en Google Play. Dejanos tu mail y te avisamos apenas esté disponible para descargar.</p>
+    <div class="badge-row">
+      <img src="https://play.google.com/intl/en_us/badges/static/images/badges/es-419_badge_web_generic.png" alt="Próximamente disponible en Google Play">
+      <p class="badge-note">Próximamente</p>
+    </div>
+    <a class="notify" href="mailto:soporte@fixgo.ar?subject=Avisenme%20cuando%20este%20en%20Google%20Play&body=Hola%2C%20quiero%20que%20me%20avisen%20apenas%20Fixgo%20est%C3%A9%20disponible%20para%20descargar.%0D%0AMi%20obra%20o%20edificio%3A%20">Avisame cuando esté</a>
+    <a class="back" href="/">← Volver a fixgo.ar</a>
+  </div>
+</body>
+</html>
