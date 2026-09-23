@@ -297,6 +297,25 @@
   .foot-links a:hover{ color:var(--navy); }
   .foot-copy{ font-size:.82rem; color:var(--ink-soft); margin-top:10px; }
 </style>
+<script>
+/* Links de invitación viejos (www.fixgo.ar/?invitacion=… / ?empresa=…) → página de invitación */
+(function(){
+  var q=new URLSearchParams(location.search);
+  if(q.get("invitacion")||q.get("empresa")||q.get("codigo")){ location.replace("/invitacion.html"+location.search); }
+})();
+/* Botones de descarga con origen medible (UTM) en Google Play.
+   Cuando la app esté publicada para todos, cambiar PLAY_PUBLICO a true.
+   Ej.: el link de la bio de Instagram es https://www.fixgo.ar/?utm_source=instagram&utm_medium=bio
+   y Play Console muestra esas instalaciones como "instagram / bio". */
+document.addEventListener("DOMContentLoaded",function(){
+  var PLAY_PUBLICO=false;
+  if(!PLAY_PUBLICO) return;
+  var q=new URLSearchParams(location.search);
+  var ref="utm_source="+(q.get("utm_source")||"web")+"&utm_medium="+(q.get("utm_medium")||"landing")+"&utm_campaign="+(q.get("utm_campaign")||"organico");
+  var play="https://play.google.com/store/apps/details?id=ar.fixgo.app&referrer="+encodeURIComponent(ref);
+  document.querySelectorAll('a[href="/proximamente.html"]').forEach(function(a){ a.href=play; });
+});
+</script>
 </head>
 <body>
 
