@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abrir en Fixgo</title>
+<meta name="description" content="Abrí este link desde tu celular Android para seguir en Fixgo.">
+<meta name="theme-color" content="#27313C">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Ver en Fixgo">
+<meta property="og:description" content="Tocá para ver las novedades de la obra en Fixgo.">
+<meta property="og:image" content="https://www.fixgo.ar/og-image.png">
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root{
+    --navy:#27313C; --navy-deep:#1B222A; --orange:#E35A0F; --orange-deep:#C24A08;
+    --ink-soft:#C6CCD2; --muted:#8892A0;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+    background:
+      repeating-linear-gradient(0deg, rgba(255,255,255,.045) 0 1px, transparent 1px 44px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.045) 0 1px, transparent 1px 44px),
+      radial-gradient(ellipse at 20% -10%, rgba(227,90,15,.22), transparent 55%),
+      var(--navy);
+    color:#fff; font-family:"Source Sans 3", system-ui, sans-serif; padding:32px 16px;
+  }
+  .card{ max-width:440px; width:100%; text-align:center; }
+  .mark{ width:72px; height:72px; border-radius:18px; margin:0 auto 24px; box-shadow:0 12px 28px -8px rgba(0,0,0,.5); display:block; }
+  .eyebrow{
+    font-family:"IBM Plex Mono",monospace; font-size:.76rem; letter-spacing:1.6px; text-transform:uppercase;
+    color:var(--orange); margin:0 0 12px; display:flex; align-items:center; justify-content:center; gap:8px;
+  }
+  .eyebrow::before, .eyebrow::after{ content:""; width:22px; height:2px; background:var(--orange); display:inline-block; }
+  h1{ font-family:"Barlow Condensed", system-ui, sans-serif; font-weight:700; font-size:clamp(2rem,7vw,2.6rem); line-height:1.05; margin:0 0 14px; text-wrap:balance; }
+  p.lead{ font-size:1.05rem; color:var(--ink-soft); margin:0 0 28px; line-height:1.55; }
+  .btn{
+    display:flex; align-items:center; justify-content:center; gap:8px; width:100%;
+    padding:16px 22px; border-radius:10px; font-weight:700; font-size:1.05rem; text-decoration:none;
+    background:var(--orange); color:#fff; box-shadow:0 10px 22px -8px rgba(227,90,15,.55); border:none; cursor:pointer;
+  }
+  .btn:hover{ background:var(--orange-deep); }
+  .btn.sec{ background:rgba(255,255,255,.08); box-shadow:none; margin-top:10px; font-weight:600; font-size:.98rem; }
+  .btn.sec:hover{ background:rgba(255,255,255,.14); }
+  .pasos{ text-align:left; margin:26px 0 0; padding:18px 18px 6px; background:rgba(0,0,0,.18); border-radius:12px; }
+  .pasos p{ margin:0 0 12px; color:var(--ink-soft); font-size:.95rem; line-height:1.45; }
+  .pasos b{ color:#fff; }
+  .codigo{
+    font-family:"IBM Plex Mono",monospace; font-size:1.05rem; letter-spacing:1px; color:#fff;
+    background:rgba(255,255,255,.08); border-radius:8px; padding:8px 12px; display:inline-block; margin-top:4px; word-break:break-all;
+  }
+  .nota{ font-size:.85rem; color:var(--muted); margin-top:22px; line-height:1.5; }
+  .oculto{ display:none; }
+  a.back{ display:block; margin-top:22px; font-size:.88rem; color:#9FA9B2; text-decoration:none; }
+</style>
+</head>
+<body>
+  <main class="card">
+    <img class="mark" src="/logo-mark.png" alt="Fixgo">
+    <p class="eyebrow" id="eyebrow">Fixgo</p>
+    <h1 id="titulo">Abriendo Fixgo…</h1>
+    <p class="lead" id="lead">Si no se abre sola, tocá el botón.</p>
+
+    <div id="android">
+      <a class="btn" id="btnAbrir" href="#">Abrir Fixgo</a>
+      <a class="btn sec" id="btnPlay" href="#">Instalar desde Google Play</a>
+    </div>
+
+    <div id="otro" class="oculto">
+      <div class="pasos">
+        <p id="textoOtro"><b>Fixgo es una app para Android.</b> Abrí este mismo link desde tu celular Android.</p>
+      </div>
+      <a class="btn sec" id="btnPlay2" href="#" style="margin-top:18px">Ver Fixgo en Google Play</a>
+    </div>
+
+    <p class="nota">¿Dudas? Escribinos a <a href="mailto:soporte@fixgo.ar" style="color:#fff">soporte@fixgo.ar</a></p>
+    <a class="back" href="/">fixgo.ar</a>
+  </main>
+
+<script>
+(function(){
+  // Página puente. Casos:
+  //  - ?obra=ID[&novedad=ID]          → link "Ver en Fixgo" del resumen por WhatsApp
+  //  - ?destino=reset-password&code=… → link de "¿Olvidaste tu contraseña?" (lo agrega Supabase)
+  //  - ?destino=login-callback&code=… → link de confirmación de cuenta (lo agrega Supabase)
+  // En Android abre la app con ar.fixgo.app://<ruta>?<los mismos parámetros>.
+  var PAQUETE = "ar.fixgo.app";
+  var q = new URLSearchParams(location.search);
+  var h = new URLSearchParams((location.hash || "").replace(/^#/, ""));
+  function $(id){ return document.getElementById(id); }
+  function limpio(v){ return (v || "").replace(/[^A-Za-z0-9_.~-]/g, ""); }
+
+  var DESTINOS = { "reset-password": 1, "login-callback": 1 };
+  var destino = q.get("destino");
+  var obra = limpio(q.get("obra"));
+  var novedad = limpio(q.get("novedad"));
+  var ruta, params = new URLSearchParams();
+
+  if (destino && DESTINOS[destino]) {
+    ruta = destino;
+    ["code", "error", "error_code", "error_description"].forEach(function(k){
+      var v = q.get(k) || h.get(k);
+      if (v) params.set(k, v);
+    });
+  } else if (obra) {
+    ruta = "obra";
+    params.set("obra", obra);
+    if (novedad) params.set("novedad", novedad);
+  }
+
+  var play = "https://play.google.com/store/apps/details?id=" + PAQUETE + "&referrer=" + encodeURIComponent("utm_source=whatsapp&utm_medium=resumen");
+  $("btnPlay").href = play;
+  $("btnPlay2").href = play;
+
+  if (!ruta) {
+    $("titulo").textContent = "Este link está incompleto";
+    $("lead").textContent = "Pedile a quien te lo mandó que lo vuelva a enviar desde Fixgo.";
+    $("android").classList.add("oculto");
+    return;
+  }
+
+  var hayError = params.get("error_description") || params.get("error");
+  if (ruta === "reset-password") {
+    $("eyebrow").textContent = "Contraseña";
+    $("titulo").textContent = hayError ? "Este link ya venció" : "Creá tu contraseña nueva";
+    $("lead").textContent = hayError ? "Pedí uno nuevo desde Fixgo, en “¿Olvidaste tu contraseña?”." : "Se abre Fixgo para que elijas tu contraseña nueva.";
+    $("textoOtro").innerHTML = hayError
+      ? "<b>Pedí un link nuevo</b> desde Fixgo en tu celular, en “¿Olvidaste tu contraseña?”, y abrilo desde ese mismo celular."
+      : "<b>Abrí este link desde el celular donde tenés Fixgo</b> y donde pediste el cambio. Por seguridad, el link funciona solo en ese celular.";
+    $("btnPlay").classList.add("oculto");
+    $("btnPlay2").classList.add("oculto");
+  } else if (ruta === "login-callback") {
+    $("eyebrow").textContent = "Cuenta";
+    $("titulo").textContent = hayError ? "Probá iniciar sesión" : "¡Tu email quedó confirmado!";
+    $("lead").textContent = "Se abre Fixgo para que entres.";
+    $("textoOtro").innerHTML = "<b>Abrí Fixgo en tu celular</b> e iniciá sesión con tu email y contraseña.";
+    $("btnPlay").classList.add("oculto");
+  } else {
+    $("eyebrow").textContent = "Obra";
+    $("titulo").textContent = "Ver la obra en Fixgo";
+    $("lead").textContent = "Si ya tenés Fixgo se abre la obra; si es la primera vez, te lleva a instalarla desde Google Play.";
+    $("textoOtro").innerHTML = "<b>Fixgo es una app para Android.</b> Abrí este mismo link desde tu celular Android para ver la obra.";
+  }
+
+  var intent = "intent://" + ruta + "?" + params.toString() +
+               "#Intent;scheme=ar.fixgo.app;package=" + PAQUETE +
+               (ruta === "obra" ? ";S.browser_fallback_url=" + encodeURIComponent(play) : "") + ";end";
+
+  if (!/Android/i.test(navigator.userAgent)) {
+    $("android").classList.add("oculto");
+    $("otro").classList.remove("oculto");
+    if (ruta === "login-callback") $("titulo").textContent = hayError ? "Probá iniciar sesión" : "¡Tu email quedó confirmado!";
+    return;
+  }
+
+  $("btnAbrir").href = intent;
+  setTimeout(function(){ try { location.href = intent; } catch(e){} }, 350);
+})();
+</script>
+</body>
+</html>
