@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Te invitaron a Fixgo</title>
-<meta name="description" content="Te sumaron a una obra en Fixgo. Abrí el link desde tu celular Android para entrar.">
+<meta name="description" content="Te sumaron a una obra en Fixgo. Abrí el link desde tu celular (Android o iPhone) para entrar.">
 <meta name="theme-color" content="#27313C">
 <meta name="robots" content="noindex">
 <meta property="og:title" content="Te sumaron a una obra en Fixgo">
@@ -77,9 +77,19 @@
       </div>
     </div>
 
+    <div id="iphone" class="oculto">
+      <a class="btn" id="btnAbrirIos" href="#">Entrar a la obra</a>
+      <a class="btn sec" id="btnAppStore" href="#">Bajar Fixgo en el App Store</a>
+      <div class="pasos">
+        <p><b>¿Recién instalaste Fixgo?</b><br>Volvé a tocar este link, o abrí Fixgo y pegá el código donde dice “¿Te invitaron a una obra?”.</p>
+        <p>Tu código de invitación:<br><span class="codigo" id="codigo3">—</span></p>
+      </div>
+      <p class="nota">Si el iPhone pregunta “¿Abrir en Fixgo?”, tocá <b>Abrir</b>.</p>
+    </div>
+
     <div id="otro" class="oculto">
       <div class="pasos">
-        <p><b>Fixgo es una app para Android.</b> Abrí este mismo link desde tu celular Android y entrás directo <span id="destinoOtro">a la obra</span>.</p>
+        <p><b>Fixgo es una app para celulares.</b> Abrí este mismo link desde tu celular Android o iPhone y entrás directo <span id="destinoOtro">a la obra</span>.</p>
         <p>Tu código de invitación:<br><span class="codigo" id="codigo2">—</span></p>
       </div>
       <a class="btn sec" id="btnPlay2" href="#" style="margin-top:18px">Ver Fixgo en Google Play</a>
@@ -96,6 +106,8 @@
 <script>
 (function(){
   var PAQUETE = "ar.fixgo.app";
+  // Link de Fixgo en el App Store. Mientras esté vacío, en iPhone no se muestra el botón de bajarla.
+  var APP_STORE = "https://apps.apple.com/app/id6817560350";
   var q = new URLSearchParams(location.search);
   var empresa = q.get("empresa");
   var codigo = empresa || q.get("codigo") || q.get("invitacion");
@@ -129,12 +141,29 @@
 
   $("codigo").textContent = limpio;
   $("codigo2").textContent = limpio;
+  $("codigo3").textContent = limpio;
   $("btnPlay").href = play;
   $("btnPlay2").href = play;
 
-  var esAndroid = /Android/i.test(navigator.userAgent);
+  var ua = navigator.userAgent || "";
+  var esIphone = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1);
+  if (esIphone) {
+    // iPhone (versión 10/10/2026): abre la app con ar.fixgo.app://invitacion?codigo=…
+    // El App Store no le pasa el código a la app al instalarla: por eso se muestra el código para pegarlo.
+    $("android").classList.add("oculto");
+    $("iphone").classList.remove("oculto");
+    $("btnAbrirIos").href = "ar.fixgo.app://invitacion?" + param + "=" + limpio;
+    if (empresa) $("btnAbrirIos").textContent = "Entrar al equipo";
+    $("lead").textContent = empresa
+      ? "Tocá el botón: si ya tenés Fixgo se abre el equipo. Si es la primera vez, instalala y volvé a tocar este link."
+      : "Tocá el botón: si ya tenés Fixgo se abre la obra. Si es la primera vez, instalala y volvé a tocar este link.";
+    if (APP_STORE) $("btnAppStore").href = APP_STORE; else $("btnAppStore").classList.add("oculto");
+    return;
+  }
+
+  var esAndroid = /Android/i.test(ua);
   if (!esAndroid) {
-    $("lead").textContent = empresa ? "Para entrar al equipo necesitás tu celular Android." : "Para entrar a la obra necesitás tu celular Android.";
+    $("lead").textContent = empresa ? "Para entrar al equipo abrí este link desde tu celular." : "Para entrar a la obra abrí este link desde tu celular.";
     $("destinoOtro").textContent = empresa ? "al equipo" : "a la obra";
     $("android").classList.add("oculto");
     $("otro").classList.remove("oculto");

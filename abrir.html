@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Abrir en Fixgo</title>
-<meta name="description" content="Abrí este link desde tu celular Android para seguir en Fixgo.">
+<meta name="description" content="Abrí este link desde tu celular (Android o iPhone) para seguir en Fixgo.">
 <meta name="theme-color" content="#27313C">
 <meta name="robots" content="noindex">
 <meta property="og:title" content="Ver en Fixgo">
@@ -73,9 +73,15 @@
       <a class="btn sec" id="btnPlay" href="#">Instalar desde Google Play</a>
     </div>
 
+    <div id="iphone" class="oculto">
+      <a class="btn" id="btnAbrirIos" href="#">Abrir Fixgo</a>
+      <a class="btn sec" id="btnAppStore" href="#">Bajar Fixgo en el App Store</a>
+      <p class="nota" id="notaIos">Si el iPhone pregunta “¿Abrir en Fixgo?”, tocá <b>Abrir</b>.</p>
+    </div>
+
     <div id="otro" class="oculto">
       <div class="pasos">
-        <p id="textoOtro"><b>Fixgo es una app para Android.</b> Abrí este mismo link desde tu celular Android.</p>
+        <p id="textoOtro"><b>Fixgo es una app para celulares.</b> Abrí este mismo link desde tu celular Android o iPhone.</p>
       </div>
       <a class="btn sec" id="btnPlay2" href="#" style="margin-top:18px">Ver Fixgo en Google Play</a>
     </div>
@@ -90,8 +96,11 @@
   //  - ?obra=ID[&novedad=ID]          → link "Ver en Fixgo" del resumen por WhatsApp
   //  - ?destino=reset-password&code=… → link de "¿Olvidaste tu contraseña?" (lo agrega Supabase)
   //  - ?destino=login-callback&code=… → link de confirmación de cuenta (lo agrega Supabase)
-  // En Android abre la app con ar.fixgo.app://<ruta>?<los mismos parámetros>.
+  // En Android abre la app con intent:// (y si no está, va a Google Play).
+  // En iPhone abre la app con ar.fixgo.app://<ruta>?<los mismos parámetros> (versión 10/10/2026).
   var PAQUETE = "ar.fixgo.app";
+  // Link de Fixgo en el App Store. Mientras esté vacío, en iPhone no se muestra el botón de bajarla.
+  var APP_STORE = "https://apps.apple.com/app/id6817560350";
   var q = new URLSearchParams(location.search);
   var h = new URLSearchParams((location.hash || "").replace(/^#/, ""));
   function $(id){ return document.getElementById(id); }
@@ -145,15 +154,37 @@
   } else {
     $("eyebrow").textContent = "Obra";
     $("titulo").textContent = "Ver la obra en Fixgo";
-    $("lead").textContent = "Si ya tenés Fixgo se abre la obra; si es la primera vez, te lleva a instalarla desde Google Play.";
-    $("textoOtro").innerHTML = "<b>Fixgo es una app para Android.</b> Abrí este mismo link desde tu celular Android para ver la obra.";
+    $("lead").textContent = "Si ya tenés Fixgo se abre la obra; si es la primera vez, te lleva a instalarla.";
+    $("textoOtro").innerHTML = "<b>Fixgo es una app para celulares.</b> Abrí este mismo link desde tu celular Android o iPhone para ver la obra.";
   }
 
   var intent = "intent://" + ruta + "?" + params.toString() +
                "#Intent;scheme=ar.fixgo.app;package=" + PAQUETE +
                (ruta === "obra" ? ";S.browser_fallback_url=" + encodeURIComponent(play) : "") + ";end";
 
-  if (!/Android/i.test(navigator.userAgent)) {
+  var ua = navigator.userAgent || "";
+  var esIphone = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1);
+  if (esIphone) {
+    var esquema = "ar.fixgo.app://" + ruta + "?" + params.toString();
+    $("android").classList.add("oculto");
+    $("iphone").classList.remove("oculto");
+    $("btnAbrirIos").href = esquema;
+    if (APP_STORE && ruta === "obra") $("btnAppStore").href = APP_STORE;
+    else $("btnAppStore").classList.add("oculto");
+    if (ruta === "obra") {
+      $("lead").textContent = "Tocá el botón para ver la obra en Fixgo.";
+    } else if (ruta === "reset-password" && hayError) {
+      $("btnAbrirIos").classList.add("oculto");
+      $("notaIos").classList.add("oculto");
+      return;
+    }
+    // Contraseña y confirmación de cuenta: la persona ya tiene la app, se intenta abrir sola.
+    // En los links de obra no, porque si no tiene la app Safari muestra un error feo: queda el botón.
+    if (ruta !== "obra") setTimeout(function(){ try { location.href = esquema; } catch(e){} }, 350);
+    return;
+  }
+
+  if (!/Android/i.test(ua)) {
     $("android").classList.add("oculto");
     $("otro").classList.remove("oculto");
     if (ruta === "login-callback") $("titulo").textContent = hayError ? "Probá iniciar sesión" : "¡Tu email quedó confirmado!";
