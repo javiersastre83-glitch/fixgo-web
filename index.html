@@ -278,6 +278,8 @@
   .plan ul{ list-style:none; padding:0; margin:18px 0 22px; display:grid; gap:10px; }
   .plan li{ display:flex; align-items:flex-start; gap:10px; font-size:.92rem; }
   .plan li svg{ color:var(--orange); flex-shrink:0; margin-top:2px; }
+  .plan .plan-nota{ font-size:.84rem; color:var(--ink-soft); margin:0 0 2px; }
+  .precio-aviso{ text-align:center; font-size:.84rem; color:var(--ink-soft); max-width:62ch; margin:30px auto 0; line-height:1.6; }
 
   /* final cta */
   .cta-final{ position:relative; overflow:hidden; background:var(--navy); color:#fff; text-align:center; padding:90px 20px; }
@@ -514,7 +516,8 @@ document.addEventListener("DOMContentLoaded",function(){
       </div>
       <div class="plan pro">
         <h3>Pro</h3>
-        <p class="price mono">USD 14,99<span>/mes</span></p>
+        <p class="price mono">$ 19.900<span>/mes</span></p>
+        <p class="plan-nota">En iPhone, USD 12,99 por mes.</p>
         <ul>
           <li><svg width="16" height="16"><use href="#ic-check"/></svg>Obras o edificios ilimitados</li>
           <li><svg width="16" height="16"><use href="#ic-check"/></svg>Modo sin conexión</li>
@@ -524,6 +527,7 @@ document.addEventListener("DOMContentLoaded",function(){
         <a class="btn btn-primary" style="width:100%;" href="mailto:soporte@fixgo.ar?subject=Me%20interesa%20Fixgo%20Pro&body=Hola%2C%20me%20interesa%20Fixgo%20Pro.%0D%0AMi%20obra%20o%20edificio%3A%20%0D%0ACu%C3%A1ntas%20obras%2Fedificios%20manejo%3A%20">Quiero Pro</a>
       </div>
     </div>
+    <p class="precio-aviso">Precios para Argentina. El precio final, en tu moneda y con los impuestos que correspondan, es el que muestra Google&nbsp;Play o el App&nbsp;Store al momento de la compra.</p>
   </div>
 </section>
 
