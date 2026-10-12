@@ -19,24 +19,25 @@
     .card li { margin-bottom: 6px; }
     .alerta { background: #FF3B3010; border-left: 4px solid #FF3B30; border-radius: 8px; padding: 14px 16px; margin: 12px 0; }
     .alerta p { color: #FF3B30; font-weight: 600; margin: 0; }
-    .planes { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 12px; }
+    .planes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
     .plan { border: 1.5px solid #E5E5EA; border-radius: 12px; padding: 16px; text-align: center; }
     .plan.pro { border-color: #FFB800; background: #FFB80008; }
-    .plan.empresa { border-color: #0057FF; background: #0057FF08; }
     .plan h3 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
     .plan .precio { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
-    .plan .sub { font-size: 11px; color: #8E8E93; }
+    .plan .sub { font-size: 11px; color: #8E8E93; line-height: 1.5; }
     .contacto-box { background: #1C1C1E; border-radius: 14px; padding: 20px; margin-top: 12px; }
     .contacto-box a { color: #FFB800; font-weight: 700; text-decoration: none; }
     .contacto-box p { color: rgba(255,255,255,0.8); font-size: 14px; margin-bottom: 6px; }
     .fecha { font-size: 13px; color: #8E8E93; margin-bottom: 24px; }
+    .botonera { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+    .botonera a { flex: 1 1 200px; text-align: center; background: #1C1C1E; color: #FFB800; font-weight: 700; font-size: 14px; text-decoration: none; padding: 13px 16px; border-radius: 10px; }
     footer { text-align: center; padding: 24px; font-size: 12px; color: #8E8E93; }
     @media (max-width: 500px) { .planes { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
   <header>
-    <img src="/Fixgo_logo.png" alt="Fixgo"/>
+    <img src="https://fixgo-app-phi.vercel.app/Fixgo_logo.png" alt="Fixgo"/>
     <div>
       <h1>Fixgo</h1>
       <p>Gestión de obras simple</p>
@@ -47,109 +48,119 @@
     <p class="fecha">Última actualización: octubre de 2026</p>
 
     <div class="card">
-      <h2>1. Aceptación de los términos</h2>
+      <h2>1. Quiénes somos y aceptación de los términos</h2>
       <p>Al descargar, instalar o utilizar la aplicación Fixgo, aceptás íntegramente estos Términos y Condiciones. Si no estás de acuerdo con alguna parte, debés discontinuar el uso de la aplicación.</p>
-      <p>Fixgo es desarrollada y operada por <strong>Javier Esteban Sastre</strong>, Córdoba, Argentina. CUIL: 20-29967197-7.</p>
+      <p>Fixgo es desarrollada y operada por:</p>
+      <ul>
+        <li><strong>Titular:</strong> Javier Esteban Sastre</li>
+        <li><strong>Domicilio:</strong> Av. República de China 1450, Barrio El Remanso, Valle Escondido, X5023BAR, Córdoba, Argentina</li>
+        <li><strong>Correo electrónico:</strong> soporte@fixgo.ar</li>
+      </ul>
+      <!-- Cuando esté la inscripción en monotributo, agregar acá esta línea y borrar este comentario:
+           <li><strong>CUIT:</strong> XX-XXXXXXXX-X</li>
+           NO publicar el CUIL: contiene el número de DNI y no es una identificación en registros fiscales. -->
     </div>
 
     <div class="card">
       <h2>2. Descripción del servicio</h2>
-      <p>Fixgo es una aplicación para celulares que permite a profesionales de la construcción y del mantenimiento (arquitectos, ingenieros, capataces, operarios y administradores) registrar, asignar, hacer seguimiento y comunicar las tareas de una obra o de un edificio.</p>
-      <p>Fixgo es una <strong>herramienta de gestión y comunicación</strong>. No es una empresa constructora, no ejecuta obras, no contrata personal ni garantiza resultados constructivos de ningún tipo.</p>
-      <p>Fixgo se distribuye a través de las tiendas oficiales: <strong>Google Play</strong> (Android) y, cuando esté disponible, el <strong>App Store de Apple</strong> (iPhone).</p>
+      <p>Fixgo es una plataforma digital que permite a profesionales de la construcción y del mantenimiento de edificios (arquitectos, ingenieros, capataces, operarios y colegas) registrar, hacer seguimiento y comunicar hallazgos, novedades, incidencias y tareas dentro de una obra o de un edificio en mantenimiento.</p>
+      <p>Fixgo es una <strong>herramienta de registro, organización y comunicación</strong>. No es una empresa constructora, no ejecuta obras, no contrata personal, no realiza inspecciones técnicas y no garantiza resultados constructivos de ningún tipo.</p>
     </div>
 
     <div class="card">
       <h2>3. Planes y precios</h2>
-      <div class="planes" style="grid-template-columns: 1fr 1fr;">
+      <div class="planes">
         <div class="plan">
           <h3>Gratuito</h3>
           <div class="precio">$0</div>
-          <div class="sub">1 obra activa · Tareas ilimitadas</div>
+          <div class="sub">1 obra · Tareas y novedades ilimitadas</div>
         </div>
         <div class="plan pro">
-          <h3>Pro ✨</h3>
-          <div class="precio">USD 14,99</div>
-          <div class="sub">por mes · obras ilimitadas</div>
+          <h3>Fixgo Pro ✨</h3>
+          <div class="precio">$ 19.900</div>
+          <div class="sub">por mes en Argentina (Android)<br/>USD 12,99 por mes en iPhone</div>
         </div>
       </div>
-      <p style="margin-top:14px;">El plan Pro incluye, además de obras ilimitadas: modo sin conexión, Informe Ejecutivo, dibujo sobre fotos, y Estudio (para quienes coordinan un equipo de profesionales).</p>
-      <p>El plan Pro es una suscripción mensual. El precio puede mostrarse en tu moneda local e incluir los impuestos que correspondan según tu país y la tienda. El precio final es siempre el que te muestra la tienda antes de confirmar la compra.</p>
-      <p>Los precios pueden modificarse con un preaviso de 30 días a los usuarios activos.</p>
+      <p style="margin-top:14px;">El plan Fixgo Pro incluye: obras ilimitadas, modo sin conexión, marcar y dibujar sobre las fotos, informe de tareas registradas, gestión en equipo sobre una misma obra (Colegas) y la vista de Estudio.</p>
+      <p>El <strong>precio final, en tu moneda y con los impuestos que correspondan, es el que muestra la tienda</strong> (Google Play o App Store) en el momento de la compra, y es el que prevalece. Los precios pueden modificarse; cualquier cambio se informa a través de la tienda antes de que se aplique, conforme a las políticas de Google y de Apple.</p>
+      <p>Actualmente no existe un plan anual ni un plan de empresa, y Fixgo no procesa pagos fuera de las tiendas.</p>
     </div>
 
     <div class="card">
-      <h2>4. Suscripciones y pagos</h2>
+      <h2>4. Suscripción, renovación y cancelación</h2>
       <ul>
-        <li><strong>Cobro:</strong> la suscripción Fixgo Pro se contrata dentro de la aplicación y se cobra a través de tu cuenta de <strong>Google Play</strong> (Android) o de <strong>Apple</strong> (iPhone), conforme a las políticas de cada tienda. Fixgo no recibe ni guarda los datos de tu medio de pago.</li>
-        <li><strong>Renovación automática:</strong> la suscripción se renueva sola cada mes, al mismo precio, hasta que la canceles. Para que no se cobre el período siguiente tenés que cancelarla al menos 24 horas antes de la fecha de renovación.</li>
-        <li><strong>Cómo cancelar:</strong> en Android, desde Google Play → Pagos y suscripciones → Suscripciones. En iPhone, desde Ajustes → tu nombre → Suscripciones. Dentro de Fixgo, en Perfil, hay un acceso directo. Al cancelar, seguís teniendo Pro hasta el final del período ya pago.</li>
-        <li><strong>Eliminar la cuenta no cancela la suscripción:</strong> si eliminás tu cuenta de Fixgo, tenés que cancelar la suscripción por separado en la tienda.</li>
-        <li><strong>Reembolsos:</strong> los pagos los procesan Google Play y Apple, y los pedidos de reembolso se rigen por las políticas de cada tienda y se gestionan ante ellas. Fixgo no realiza reembolsos por períodos parciales ya facturados, sin perjuicio de los derechos que te reconozca la ley aplicable.</li>
-        <li><strong>Falta de pago o fin de la suscripción:</strong> la cuenta pasa automáticamente al Plan Gratuito. Todas las obras quedan visibles con su historial completo, pero solo 1 obra permanece activa. Las restantes quedan <strong>pausadas</strong>: no se pueden agregar ni editar tareas hasta renovar la suscripción. Ningún dato se elimina.</li>
+        <li>La suscripción a Fixgo Pro es <strong>mensual y se renueva automáticamente</strong> al vencimiento de cada período, hasta que la canceles.</li>
+        <li>El cobro lo procesa <strong>Google Play Billing</strong> en Android y <strong>Apple</strong> en iPhone, conforme a las políticas de cada plataforma. Fixgo no accede ni almacena datos de tu tarjeta ni de tu medio de pago.</li>
+        <li>Podés <strong>cancelar en cualquier momento</strong>: en Android, desde Google Play → Suscripciones; en iPhone, desde Ajustes → tu cuenta de Apple → Suscripciones. La cancelación evita la siguiente renovación y mantiene el acceso hasta el final del período ya pagado.</li>
+        <li>Los reembolsos los gestionan Google y Apple según sus propias políticas, sin perjuicio de los derechos que te reconoce la Ley N° 24.240 (ver sección 5).</li>
+        <li>Si la suscripción se interrumpe, la cuenta vuelve al plan gratuito. <strong>Ningún dato se elimina:</strong> todas tus obras siguen visibles con su historial completo, pero solo 1 obra permanece activa; las restantes quedan pausadas y no se pueden agregar ni editar novedades en ellas hasta reactivar Pro.</li>
       </ul>
     </div>
 
     <div class="card">
-      <h2>5. Propiedad del contenido</h2>
-      <p>Todo el contenido que cargás en Fixgo (fotos, descripciones de tareas, mensajes, datos de obras) es de tu propiedad o de la empresa que representás.</p>
-      <p>Al usar Fixgo, nos otorgás una licencia limitada, no exclusiva y revocable para <strong>almacenar, procesar y mostrar</strong> ese contenido únicamente con el fin de prestar el servicio. No usamos tu contenido para otros fines.</p>
-    </div>
-
-    <div class="card">
-      <h2>6. Limitación de responsabilidad</h2>
-      <div class="alerta">
-        <p>⚠️ Fixgo es una herramienta de gestión. No nos hacemos responsables por la ejecución, calidad o resultado de ninguna obra de construcción.</p>
+      <h2>5. Derecho de arrepentimiento y baja del servicio</h2>
+      <p>Si sos consumidor, tenés derecho a <strong>revocar la contratación dentro de los 10 (diez) días corridos</strong> contados desde la celebración del contrato, sin expresar causa y sin costo alguno, conforme al artículo 34 de la Ley N° 24.240 de Defensa del Consumidor. Si el plazo vence en un día inhábil, se prorroga al primer día hábil siguiente.</p>
+      <p>También podés solicitar la <strong>baja del servicio</strong> en cualquier momento, por el mismo medio por el que lo contrataste o a través de los botones disponibles en nuestro sitio.</p>
+      <div class="botonera">
+        <a href="https://fixgo.ar/arrepentimiento">BOTÓN DE ARREPENTIMIENTO</a>
+        <a href="https://fixgo.ar/baja">BOTÓN DE BAJA DE SERVICIO</a>
       </div>
-      <p>Específicamente, Fixgo no asume responsabilidad por:</p>
-      <ul>
-        <li>Defectos constructivos, accidentes o daños materiales en obra.</li>
-        <li>Incumplimiento de plazos por parte de contratistas o profesionales.</li>
-        <li>Decisiones tomadas por los usuarios basadas en la información registrada en la app.</li>
-        <li>Pérdida de datos por causas de fuerza mayor, fallas de conectividad o errores del dispositivo del usuario.</li>
-        <li>Uso indebido de la plataforma por parte de terceros con acceso autorizado por el usuario.</li>
-      </ul>
+      <p style="margin-top:12px;">Dentro de las <strong>24 horas</strong> de recibida tu solicitud te enviaremos, por el mismo medio, un código de identificación del trámite. Nuestro canal de atención es el correo electrónico <strong>soporte@fixgo.ar</strong>, atendido de <strong>lunes a viernes de 9 a 17 h</strong>, a cargo del titular del servicio.</p>
+      <p>Dado que el cobro lo procesan Google y Apple, Fixgo recibe y tramita tu solicitud y la deriva a la plataforma correspondiente para la devolución del importe.</p>
     </div>
 
     <div class="card">
-      <h2>7. Uso correcto de la plataforma</h2>
+      <h2>6. Propiedad del contenido</h2>
+      <p>Todo el contenido que cargás en Fixgo (fotos, descripciones de novedades, comentarios, audios, datos de obras) es de tu propiedad o de la empresa que representás.</p>
+      <p>Al usar Fixgo, nos otorgás una licencia limitada, no exclusiva y revocable para <strong>almacenar, procesar y mostrar</strong> ese contenido únicamente con el fin de prestar el servicio. No usamos tu contenido para otros fines, no lo cedemos a terceros y no lo utilizamos para entrenar modelos.</p>
+      <p>El software de Fixgo, su nombre, su logotipo y su diseño son propiedad de su titular y están protegidos por la Ley N° 11.723 de Propiedad Intelectual.</p>
+    </div>
+
+    <div class="card">
+      <h2>7. Limitación de responsabilidad</h2>
+      <div class="alerta">
+        <p>⚠️ Fixgo es una herramienta de registro y organización. No reemplaza el criterio profesional de quien la usa, ni la documentación técnica o legal de una obra.</p>
+      </div>
+      <p>En particular, el usuario reconoce y acepta que Fixgo:</p>
+      <ul>
+        <li><strong>No realiza inspecciones técnicas</strong> ni verifica, valida o audita la información que los usuarios cargan. El contenido de cada novedad, foto, comentario o informe es responsabilidad exclusiva de quien lo registró.</li>
+        <li><strong>No constituye libro de obra</strong> ni documentación técnica oficial, ni reemplaza los registros, certificaciones, actas o comunicaciones que la normativa aplicable, el comitente o el colegio profesional correspondiente exijan.</li>
+        <li><strong>No sustituye el criterio ni las obligaciones profesionales</strong> de los matriculados y responsables técnicos que intervienen en la obra, cuya responsabilidad permanece íntegramente a su cargo.</li>
+      </ul>
+      <p>Fixgo no asume responsabilidad por: defectos constructivos, accidentes o daños materiales en obra; incumplimiento de plazos por parte de contratistas o profesionales; decisiones tomadas por los usuarios sobre la base de la información registrada en la app; pérdida de datos por fuerza mayor, fallas de conectividad o del dispositivo del usuario; ni por el uso indebido de la plataforma por parte de terceros a quienes el usuario haya dado acceso.</p>
+      <p>Sin perjuicio de los derechos irrenunciables que la Ley N° 24.240 reconoce a los consumidores, y en la máxima medida permitida por la legislación aplicable, <strong>la responsabilidad total acumulada de Fixgo frente a un usuario se limita al monto que ese usuario haya efectivamente abonado en concepto de suscripción durante los 12 (doce) meses anteriores al hecho que motiva el reclamo</strong>. Para los usuarios del plan gratuito, ese límite es cero.</p>
+    </div>
+
+    <div class="card">
+      <h2>8. Datos de otras personas que cargás en la app</h2>
+      <p>Cuando registrás en Fixgo datos personales de terceros —el nombre y el teléfono de alguien a quien invitás, o fotografías en las que aparecen personas— <strong>vos actuás como responsable de esos datos</strong> y Fixgo actúa como encargado del tratamiento, por tu cuenta y orden.</p>
+      <p>Al cargarlos declarás que contás con el consentimiento o con la base legal necesaria, y que informaste a esas personas sobre el tratamiento. Te comprometés a mantener indemne al titular de Fixgo frente a reclamos de terceros derivados del incumplimiento de esta obligación.</p>
+    </div>
+
+    <div class="card">
+      <h2>9. Uso correcto de la plataforma</h2>
       <p>El usuario se compromete a no utilizar Fixgo para:</p>
       <ul>
-        <li>Subir contenido ofensivo, discriminatorio, ilegal o ajeno a la gestión de obras.</li>
-        <li>Registrar datos personales de terceros sin su consentimiento.</li>
-        <li>Intentar acceder a datos de obras o usuarios de otros proyectos.</li>
-        <li>Realizar ingeniería inversa, copiar o distribuir el software.</li>
+        <li>Subir contenido ofensivo, discriminatorio, ilegal o ajeno a la gestión de obras y del mantenimiento de edificios.</li>
+        <li>Registrar datos personales de terceros sin su consentimiento o sin base legal.</li>
+        <li>Intentar acceder a datos de obras o de usuarios de otros proyectos.</li>
+        <li>Realizar ingeniería inversa, copiar, descompilar o distribuir el software.</li>
         <li>Cualquier actividad que viole las leyes de la República Argentina.</li>
       </ul>
-      <p>Fixgo no tolera contenido abusivo, ofensivo o ilegal en las fotos, los audios ni los mensajes. Quien dirige una obra puede eliminar en cualquier momento las tareas y los mensajes de esa obra y quitar a un integrante del equipo. Si ves contenido inapropiado, podés denunciarlo escribiendo a <strong>soporte@fixgo.ar</strong>: lo revisamos y, si corresponde, lo eliminamos y suspendemos la cuenta responsable.</p>
-      <p>El incumplimiento de estas condiciones puede resultar en la suspensión inmediata de la cuenta.</p>
+      <p>El incumplimiento de estas condiciones puede resultar en la suspensión de la cuenta, previa notificación cuando las circunstancias lo permitan.</p>
     </div>
 
     <div class="card">
-      <h2>8. Edad mínima requerida</h2>
-      <p>Fixgo está destinada exclusivamente a <strong>personas mayores de 18 años</strong>. Al usar la aplicación, declarás tener al menos 18 años de edad.</p>
-      <p>Si tenés conocimiento de que un menor de 18 años está usando Fixgo, te pedimos que nos lo informes a <strong>soporte@fixgo.ar</strong>. Nos reservamos el derecho de suspender o eliminar cualquier cuenta que pertenezca a un menor de edad.</p>
+      <h2>10. Modificaciones del servicio y de estos términos</h2>
+      <p>Fixgo se reserva el derecho de modificar, agregar o eliminar funcionalidades de la aplicación, e interrumpir el servicio temporalmente por mantenimiento o actualización.</p>
+      <p>Cuando modifiquemos estos Términos de manera significativa, te lo informaremos por correo electrónico o mediante un aviso dentro de la app con una antelación razonable. Si no estás de acuerdo con los nuevos términos, podés dar de baja la suscripción y eliminar tu cuenta.</p>
     </div>
 
     <div class="card">
-      <h2>9. Modificaciones del servicio</h2>
-      <p>Fixgo se reserva el derecho de:</p>
-      <ul>
-        <li>Modificar, agregar o eliminar funcionalidades de la aplicación.</li>
-        <li>Actualizar los precios de los planes con un preaviso de 30 días.</li>
-        <li>Suspender cuentas por mal uso o incumplimiento de estos términos.</li>
-        <li>Interrumpir el servicio temporalmente por mantenimiento o actualización.</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h2>10. Usuarios de iPhone</h2>
-      <p>Si descargaste Fixgo desde el App Store, además de estos Términos se aplica el <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">Contrato de licencia de usuario final estándar de Apple</a>. Apple no es responsable de la aplicación ni de su contenido, ni está obligada a prestar soporte o mantenimiento: cualquier consulta o reclamo sobre Fixgo debe dirigirse a <strong>soporte@fixgo.ar</strong>.</p>
-    </div>
-
-    <div class="card">
-      <h2>11. Jurisdicción y legislación aplicable</h2>
-      <p>Estos Términos y Condiciones se rigen por las leyes de la <strong>República Argentina</strong>. Cualquier controversia derivada del uso de Fixgo será sometida a los tribunales ordinarios de la ciudad de <strong>Córdoba, Argentina</strong>.</p>
+      <h2>11. Legislación aplicable y jurisdicción</h2>
+      <p>Estos Términos y Condiciones se rigen por las leyes de la <strong>República Argentina</strong>.</p>
+      <p>Para los usuarios que revistan el carácter de consumidores, será competente el tribunal correspondiente al <strong>domicilio real del consumidor</strong>, conforme al artículo 36 de la Ley N° 24.240. Para los demás casos, las partes se someten a los tribunales ordinarios de la ciudad de Córdoba, Argentina.</p>
+      <p>Antes de iniciar una acción judicial, podés presentar tu reclamo ante el Servicio de Conciliación Previa en las Relaciones de Consumo (COPREC) o ante la autoridad de aplicación de tu jurisdicción.</p>
     </div>
 
     <div class="card">
@@ -157,9 +168,12 @@
       <p>Para consultas sobre estos términos:</p>
       <div class="contacto-box">
         <p>Javier Esteban Sastre</p>
-        <p>Córdoba, Argentina</p>
+        <p>Av. República de China 1450</p>
+        <p>Barrio El Remanso, Valle Escondido</p>
+        <p>X5023BAR — Córdoba, Argentina</p>
         <a href="mailto:soporte@fixgo.ar">soporte@fixgo.ar</a>
         <p style="margin-top:8px;"><a href="https://fixgo.ar">fixgo.ar</a></p>
+        <p style="margin-top:10px; font-size:12px; color:rgba(255,255,255,0.4);">Canal de atención: correo electrónico, de lunes a viernes de 9 a 17 h.</p>
       </div>
     </div>
   </div>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Botón de Baja de Servicio – Fixgo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #1C1C1E; background: #F2F2F7; }
+    header { background: #1C1C1E; padding: 32px 24px 24px; display: flex; align-items: center; gap: 14px; }
+    header img { width: 48px; height: 48px; border-radius: 12px; }
+    header h1 { color: #fff; font-size: 22px; font-weight: 800; }
+    header p { color: rgba(255,255,255,0.5); font-size: 13px; margin-top: 2px; }
+    .container { max-width: 620px; margin: 0 auto; padding: 32px 24px 64px; }
+    .titulo { font-size: 13px; font-weight: 800; letter-spacing: .08em; color: #FF3B30; margin-bottom: 8px; }
+    .h { font-size: 26px; font-weight: 800; margin-bottom: 10px; line-height: 1.25; }
+    .bajada { font-size: 15px; line-height: 1.7; color: #3A3A3C; margin-bottom: 20px; }
+    .card { background: #fff; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+    .card h2 { font-size: 16px; font-weight: 700; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid #F2F2F7; }
+    .card p, .card li { font-size: 14.5px; line-height: 1.7; color: #3A3A3C; margin-bottom: 8px; }
+    .card ul { padding-left: 20px; } .card li { margin-bottom: 6px; }
+    label { display: block; font-size: 13px; font-weight: 700; color: #1C1C1E; margin: 14px 0 6px; }
+    label .op { font-weight: 500; color: #8E8E93; }
+    input, select, textarea { width: 100%; font: inherit; font-size: 16px; color: #1C1C1E; background: #F7F7F9;
+      border: 1.5px solid #E5E5EA; border-radius: 10px; padding: 12px 14px; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: #FFB800; background: #fff; }
+    textarea { min-height: 92px; resize: vertical; }
+    .err { color: #FF3B30; font-size: 13px; font-weight: 600; margin-top: 6px; display: none; }
+    .err.on { display: block; }
+    button { width: 100%; font: inherit; font-size: 16px; font-weight: 800; color: #1C1C1E; background: #FFB800;
+      border: 0; border-radius: 12px; padding: 16px; margin-top: 22px; cursor: pointer; letter-spacing: .02em; }
+    button:hover { background: #E9A800; }
+    button:disabled { opacity: .55; cursor: default; }
+    .nota { font-size: 12.5px; color: #8E8E93; margin-top: 12px; line-height: 1.6; }
+    .nota a { color: #1C1C1E; }
+    .ok { background: #fff; border-radius: 16px; padding: 28px 24px; text-align: center; }
+    .ok .tick { font-size: 40px; line-height: 1; }
+    .ok h2 { font-size: 21px; font-weight: 800; margin: 12px 0 8px; }
+    .ok p { font-size: 14.5px; line-height: 1.7; color: #3A3A3C; margin-bottom: 10px; }
+    .codigo { background: #1C1C1E; color: #FFB800; border-radius: 12px; padding: 18px;
+      font-size: 24px; font-weight: 800; letter-spacing: .08em; margin: 16px 0; font-variant-numeric: tabular-nums; }
+    .legal { background: #F7F7F9; border-left: 3px solid #8E8E93; border-radius: 8px; padding: 14px 16px; margin-top: 14px; }
+    .legal p { font-size: 13px; color: #55555A; margin: 0; }
+    footer { text-align: center; padding: 24px; font-size: 12px; color: #8E8E93; }
+    footer a { color: #8E8E93; }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://fixgo-app-phi.vercel.app/Fixgo_logo.png" alt="Fixgo"/>
+    <div>
+      <h1>Fixgo</h1>
+      <p>Gestión de obras simple</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <p class="titulo">BOTÓN DE BAJA DE SERVICIO</p>
+    <h1 class="h">Quiero dar de baja mi suscripción</h1>
+    <p class="bajada">Podés dar de baja Fixgo Pro <strong>cuando quieras, sin dar explicaciones y sin costo</strong>.
+      Completá este formulario y listo: no hace falta tener cuenta abierta ni llamar a nadie.</p>
+
+    <div class="card" style="border-left:4px solid #FFB800">
+      <h2>La forma más rápida: cancelar en la tienda</h2>
+      <p>Como el cobro lo procesan Google y Apple, la baja es inmediata si la hacés directamente ahí:</p>
+      <ul>
+        <li><strong>Android:</strong> Google Play → tu foto de perfil → Pagos y suscripciones → Suscripciones → Fixgo → Cancelar.</li>
+        <li><strong>iPhone:</strong> Ajustes → tu nombre → Suscripciones → Fixgo → Cancelar suscripción.</li>
+      </ul>
+      <p>Si preferís que lo tramitemos nosotros, o no podés entrar a la tienda, usá el formulario de abajo.</p>
+    </div>
+
+    <div class="card" id="form-card">
+      <h2>Tus datos</h2>
+      <form id="f" novalidate>
+        <label for="nombre">Nombre y apellido</label>
+        <input id="nombre" name="nombre" type="text" autocomplete="name" required>
+
+        <label for="email">Correo electrónico de tu cuenta de Fixgo</label>
+        <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required>
+
+        <label for="telefono">Teléfono <span class="op">(opcional)</span></label>
+        <input id="telefono" name="telefono" type="tel" autocomplete="tel" inputmode="tel">
+
+        <label for="plataforma">¿Dónde contrataste Fixgo Pro?</label>
+        <select id="plataforma" name="plataforma">
+          <option value="google-play">Google Play (Android)</option>
+          <option value="app-store">App Store (iPhone)</option>
+          <option value="no-se">No estoy seguro</option>
+        </select>
+
+        <label for="detalle">Algo que quieras aclarar <span class="op">(opcional)</span></label>
+        <textarea id="detalle" name="detalle" placeholder="No es obligatorio. Si nos contás por qué te vas, nos ayuda a mejorar."></textarea>
+
+        <p class="err" id="err"></p>
+        <button type="submit" id="enviar">Enviar la solicitud</button>
+        <p class="nota">Vas a recibir en pantalla, al instante, un código de identificación del trámite.
+          Guardalo: es tu comprobante.</p>
+      </form>
+    </div>
+
+    <div class="card" id="ok-card" hidden>
+      <div class="ok">
+        <div class="tick">✅</div>
+        <h2>Solicitud recibida</h2>
+        <p>Tu código de identificación del trámite es:</p>
+        <div class="codigo" id="codigo">—</div>
+        <p><strong>Guardá este código.</strong> Te lo pedimos si necesitás hacer un seguimiento.</p>
+        <p>Vamos a tramitar la baja y a derivarla a la tienda donde contrataste (Google Play o App Store),
+          que es quien da de baja la renovación automática. Vas a conservar el acceso a Fixgo Pro hasta el final
+          del período que ya pagaste.</p>
+        <p><strong>No se borra nada.</strong> Tus obras y tus datos siguen ahí; al volver al plan gratuito
+          queda 1 obra activa y el resto en pausa. Si querés eliminar también tu cuenta y todos tus datos,
+          se hace desde la app: Perfil → Eliminar cuenta permanentemente.</p>
+        <p>Si querés dejar constancia por escrito, podés escribirnos a
+          <a href="mailto:soporte@fixgo.ar">soporte@fixgo.ar</a> citando el código.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Lo que tenés que saber</h2>
+      <ul>
+        <li>La baja es <strong>gratuita</strong>, <strong>sin explicaciones</strong> y podés pedirla en cualquier momento.</li>
+        <li>Conservás el acceso hasta el final del período que ya pagaste. No hay cobros posteriores.</li>
+        <li><strong>No se elimina ningún dato.</strong> La cuenta vuelve al plan gratuito con 1 obra activa.</li>
+        <li>Si contrataste hace 10 días corridos o menos y querés que te devuelvan el dinero, usá el
+          <a href="/arrepentimiento">Botón de arrepentimiento</a>.</li>
+      </ul>
+      <div class="legal">
+        <p><strong>Canal de atención:</strong> correo electrónico <strong>soporte@fixgo.ar</strong>,
+        de <strong>lunes a viernes de 9 a 17 h</strong>. Área responsable: titular del servicio,
+        Javier Esteban Sastre, Av. República de China 1450, Barrio El Remanso, Valle Escondido, X5023BAR, Córdoba. Respondemos el código de identificación dentro de las 24 horas de recibida la solicitud,
+        conforme al artículo 5 de la Disposición 954/2025.</p>
+      </div>
+      <div class="legal">
+        <p>Baja de servicio prevista en el artículo 4 de la Disposición 954/2025 de la Dirección Nacional
+        de Defensa del Consumidor, en el marco de la Ley N° 24.240 de Defensa del Consumidor.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    © 2026 Fixgo · <a href="/terminos-condiciones">Términos</a> · <a href="/politica-privacidad">Privacidad</a>
+  </footer>
+
+<script>
+(function(){
+  var FN = "https://kvemmluxgdlhandjpbfn.supabase.co/functions/v1/solicitud-baja";
+  var KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt2ZW1tbHV4Z2RsaGFuZGpwYmZuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk4NTM3MjcsImV4cCI6MjA5NTQyOTcyN30.3lAmFsL12eCFz159F3PseXGAvydPFxpc5edI5LWIA7E";
+  var TIPO = "baja";
+
+  var f = document.getElementById("f"), err = document.getElementById("err"),
+      btn = document.getElementById("enviar");
+
+  function fallar(msg){ err.textContent = msg; err.className = "err on"; }
+
+  f.addEventListener("submit", async function(ev){
+    ev.preventDefault();
+    err.className = "err";
+    var nombre = f.nombre.value.trim(), email = f.email.value.trim();
+    if(nombre.length < 2) return fallar("Escribí tu nombre y apellido.");
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return fallar("Revisá el correo electrónico: parece incompleto.");
+
+    btn.disabled = true; btn.textContent = "Enviando...";
+    try{
+      var r = await fetch(FN, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "apikey": KEY, "Authorization": "Bearer " + KEY },
+        body: JSON.stringify({
+          tipo: TIPO, nombre: nombre, email: email,
+          telefono: f.telefono.value.trim(), plataforma: f.plataforma.value,
+          detalle: f.detalle.value.trim()
+        })
+      });
+      var d = await r.json().catch(function(){ return {}; });
+      if(!r.ok || !d.codigo) throw new Error(d.error || "sin codigo");
+      document.getElementById("codigo").textContent = d.codigo;
+      document.getElementById("form-card").hidden = true;
+      document.getElementById("ok-card").hidden = false;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }catch(e){
+      btn.disabled = false; btn.textContent = "Enviar la solicitud";
+      fallar('No pudimos enviar la solicitud desde acá. Escribinos a soporte@fixgo.ar con el asunto "BAJA DE SERVICIO" y tus datos: tu pedido vale igual y tiene la misma fecha.');
+    }
+  });
+})();
+</script>
+</body>
+</html>
