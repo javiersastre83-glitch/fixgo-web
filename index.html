@@ -317,12 +317,15 @@
   if(q.get("invitacion")||q.get("empresa")||q.get("codigo")){ location.replace("/invitacion.html"+location.search); }
 })();
 /* Botones de descarga con origen medible (UTM) en Google Play.
-   Cuando la app esté publicada para todos, cambiar PLAY_PUBLICO a true.
+   Publicada en Google Play el 15/10/2026. En iPhone los botones siguen yendo a
+   /proximamente.html hasta que salga en el App Store.
    Ej.: el link de la bio de Instagram es https://www.fixgo.ar/?utm_source=instagram&utm_medium=bio
    y Play Console muestra esas instalaciones como "instagram / bio". */
 document.addEventListener("DOMContentLoaded",function(){
-  var PLAY_PUBLICO=false;
+  var PLAY_PUBLICO=true;
   if(!PLAY_PUBLICO) return;
+  var esIphone=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+  if(esIphone) return;
   var q=new URLSearchParams(location.search);
   var ref="utm_source="+(q.get("utm_source")||"web")+"&utm_medium="+(q.get("utm_medium")||"landing")+"&utm_campaign="+(q.get("utm_campaign")||"organico");
   var play="https://play.google.com/store/apps/details?id=ar.fixgo.app&referrer="+encodeURIComponent(ref);
@@ -371,7 +374,7 @@ document.addEventListener("DOMContentLoaded",function(){
       </div>
       <p class="hero-note mono">
         <svg width="15" height="15"><use href="#ic-phone"/></svg>
-        Para Android y iPhone
+        Ya en Android · Muy pronto en iPhone
       </p>
     </div>
     <div class="hero-visual">
@@ -502,7 +505,7 @@ document.addEventListener("DOMContentLoaded",function(){
   <div class="wrap">
     <p class="kicker" style="text-align:center;">Planes</p>
     <h2 class="section-title" style="text-align:center;">Empezá gratis, escalá cuando lo necesites</h2>
-    <p class="section-lead" style="text-align:center; margin-left:auto; margin-right:auto;">Se descarga gratis en Android y iPhone. Sin compromiso.</p>
+    <p class="section-lead" style="text-align:center; margin-left:auto; margin-right:auto;">Se descarga gratis en Android. Muy pronto en iPhone.</p>
     <div class="pricing">
       <div class="plan">
         <h3>Gratuito</h3>
@@ -524,7 +527,7 @@ document.addEventListener("DOMContentLoaded",function(){
           <li><svg width="16" height="16"><use href="#ic-check"/></svg>Informe ejecutivo en PDF</li>
           <li><svg width="16" height="16"><use href="#ic-check"/></svg>Dibujo sobre fotos + Estudio</li>
         </ul>
-        <a class="btn btn-primary" style="width:100%;" href="mailto:soporte@fixgo.ar?subject=Me%20interesa%20Fixgo%20Pro&body=Hola%2C%20me%20interesa%20Fixgo%20Pro.%0D%0AMi%20obra%20o%20edificio%3A%20%0D%0ACu%C3%A1ntas%20obras%2Fedificios%20manejo%3A%20">Quiero Pro</a>
+        <a class="btn btn-primary" style="width:100%;" href="/proximamente.html">Quiero Pro</a>
       </div>
     </div>
     <p class="precio-aviso">Precios para Argentina. El precio final, en tu moneda y con los impuestos que correspondan, es el que muestra Google&nbsp;Play o el App&nbsp;Store al momento de la compra.</p>
@@ -533,7 +536,7 @@ document.addEventListener("DOMContentLoaded",function(){
 
 <section class="cta-final">
   <h2>¿Tu obra o tu edificio ya tiene este problema?</h2>
-  <p>Escribinos y te contamos cómo empezar. Para Android y iPhone.</p>
+  <p>Descargala gratis y cargá tu primera obra hoy. Ya en Android, muy pronto en iPhone.</p>
   <a class="btn btn-primary" href="/proximamente.html">Quiero probarla</a>
 </section>
 
