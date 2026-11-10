@@ -318,7 +318,8 @@
 })();
 /* Botones de descarga con origen medible (UTM) en Google Play.
    Publicada en Google Play el 15/10/2026 y en el App Store el 10/11/2026.
-   En iPhone los botones van al App Store; en el resto, a Google Play.
+   En iPhone los botones van al App Store; en Android, a Google Play;
+   en computadora, a /proximamente.html (página con las dos tiendas).
    Ej.: el link de la bio de Instagram es https://www.fixgo.ar/?utm_source=instagram&utm_medium=bio
    y Play Console muestra esas instalaciones como "instagram / bio". */
 document.addEventListener("DOMContentLoaded",function(){
@@ -329,6 +330,9 @@ document.addEventListener("DOMContentLoaded",function(){
     document.querySelectorAll('a[href="/proximamente.html"]').forEach(function(a){ a.href="https://apps.apple.com/ar/app/fixgo/id6817560350"; });
     return;
   }
+  // En computadora no sabemos qué celular tiene: los botones van a /proximamente.html,
+  // que muestra las dos tiendas (App Store y Google Play).
+  if(!/Android/i.test(navigator.userAgent)) return;
   var q=new URLSearchParams(location.search);
   var ref="utm_source="+(q.get("utm_source")||"web")+"&utm_medium="+(q.get("utm_medium")||"landing")+"&utm_campaign="+(q.get("utm_campaign")||"organico");
   var play="https://play.google.com/store/apps/details?id=ar.fixgo.app&referrer="+encodeURIComponent(ref);
