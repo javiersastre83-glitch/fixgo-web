@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Navidad en la playa 2026 · Propuestas para la familia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sand:#fbf6ee; --sand2:#f3e9d8; --ink:#1d2a33; --muted:#5d6b75;
+  --ocean:#0e7c86; --ocean-d:#0a5961; --coral:#e8664a; --sun:#f2b33d; --leaf:#2f8f5b;
+  --card:#ffffff; --line:#e6dccb; --radius:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--sand);color:var(--ink);line-height:1.55}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.15;margin:0}
+a{color:var(--ocean)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* HERO */
+.hero{position:relative;min-height:78vh;display:flex;align-items:flex-end;color:#fff;overflow:hidden}
+.hero .bg{position:absolute;inset:0;background:#0a5961 center/cover no-repeat}
+.hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 20%,rgba(6,40,46,.85) 100%)}
+.hero .wrap{position:relative;padding-bottom:56px;padding-top:80px}
+.eyebrow{display:inline-block;background:rgba(255,255,255,.18);backdrop-filter:blur(6px);padding:6px 14px;border-radius:999px;font-size:.85rem;letter-spacing:.04em}
+.hero h1{font-size:clamp(2.4rem,6vw,4.6rem);margin:18px 0 12px}
+.hero p.lead{font-size:1.15rem;max-width:640px;opacity:.95}
+.facts{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.fact{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);padding:10px 16px;border-radius:14px;font-size:.95rem}
+.fact b{display:block;font-size:1.25rem}
+.count{font-variant-numeric:tabular-nums}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:20;background:rgba(251,246,238,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;gap:8px;align-items:center;overflow-x:auto;padding-top:10px;padding-bottom:10px}
+.nav a{white-space:nowrap;text-decoration:none;color:var(--ink);padding:7px 13px;border-radius:999px;font-weight:600;font-size:.9rem}
+.nav a:hover{background:var(--sand2)}
+.nav .sp{flex:1}
+
+/* FILTERS */
+section{padding:56px 0}
+.sec-title{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:22px}
+.sec-title h2{font-size:clamp(1.8rem,3.5vw,2.5rem)}
+.sec-title p{margin:6px 0 0;color:var(--muted)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:#fff;padding:8px 14px;border-radius:999px;cursor:pointer;font:inherit;font-size:.9rem;font-weight:600;color:var(--ink)}
+.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* OVERVIEW STRIP */
+.strip{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.mini{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:3/4;cursor:pointer;color:#fff;text-decoration:none;background:#0a5961}
+.mini img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.mini:hover img{transform:scale(1.06)}
+.mini .cap{position:absolute;inset:auto 0 0 0;padding:14px;background:linear-gradient(transparent,rgba(0,0,0,.75))}
+.mini .cap b{font-family:Fraunces,serif;font-size:1.2rem;display:block}
+.mini .cap span{font-size:.85rem;opacity:.9}
+.mini .tag{position:absolute;top:10px;left:10px;font-size:.72rem;font-weight:700;padding:4px 9px;border-radius:999px;background:#fff;color:var(--ink)}
+
+/* DEST CARD */
+.dest{background:var(--card);border-radius:24px;box-shadow:0 10px 40px rgba(30,40,50,.08);overflow:hidden;margin-bottom:34px;border:1px solid var(--line)}
+.dest.hidden{display:none}
+.dest-head{display:grid;grid-template-columns:1.25fr 1fr;gap:0}
+.gallery{position:relative;background:#0a5961;min-height:420px}
+.gallery .main{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .35s}
+.gallery .badge{position:absolute;top:16px;left:16px;display:flex;gap:6px;flex-wrap:wrap}
+.pill{font-size:.75rem;font-weight:700;padding:5px 10px;border-radius:999px;background:#fff;color:var(--ink)}
+.pill.g{background:var(--leaf);color:#fff}.pill.c{background:var(--coral);color:#fff}.pill.s{background:var(--sun);color:#3a2a00}.pill.o{background:var(--ocean);color:#fff}
+.thumbs{position:absolute;left:12px;right:12px;bottom:12px;display:flex;gap:8px;overflow-x:auto}
+.thumbs button{flex:0 0 auto;width:74px;height:54px;border-radius:10px;overflow:hidden;border:2px solid rgba(255,255,255,.6);padding:0;cursor:pointer;background:#123;opacity:.75}
+.thumbs button.on{border-color:#fff;opacity:1}
+.thumbs img{width:100%;height:100%;object-fit:cover}
+.photo-cap{position:absolute;right:14px;top:14px;background:rgba(0,0,0,.5);color:#fff;font-size:.72rem;padding:4px 9px;border-radius:999px;max-width:60%}
+.info{padding:28px 30px}
+.info .where{color:var(--ocean);font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.06em}
+.info h3{font-size:2.1rem;margin:4px 0 6px}
+.info .hotel{font-weight:600}
+.info .hotel small{color:var(--muted);font-weight:500}
+.pitch{font-size:1.02rem;margin:14px 0}
+.price{background:var(--sand);border-radius:16px;padding:16px 18px;margin-top:14px}
+.price .total{font-family:Fraunces,serif;font-size:2.2rem;font-weight:700}
+.price .total small{font-family:Inter;font-size:.85rem;font-weight:500;color:var(--muted)}
+.break{display:flex;gap:18px;flex-wrap:wrap;font-size:.88rem;color:var(--muted);margin-top:2px}
+.bar{height:10px;background:#e9e1d2;border-radius:99px;margin-top:12px;position:relative;overflow:visible}
+.bar i{display:block;height:100%;border-radius:99px;background:var(--leaf);max-width:100%}
+.bar .mark{position:absolute;top:-6px;bottom:-6px;width:2px;background:var(--ink)}
+.bar-legend{display:flex;justify-content:space-between;font-size:.78rem;color:var(--muted);margin-top:6px}
+.over{color:var(--coral);font-weight:700}.under{color:var(--leaf);font-weight:700}
+.toggle{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+.toggle button{font:inherit;font-size:.82rem;font-weight:600;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;cursor:pointer}
+.toggle button.on{background:var(--ocean);border-color:var(--ocean);color:#fff}
+
+.dest-body{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:6px 30px 30px}
+.box h4{margin:0 0 8px;font-size:.8rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.box ul{margin:0;padding-left:18px}
+.box li{margin:4px 0}
+.who{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.who div{background:var(--sand);border-radius:12px;padding:10px 12px;font-size:.9rem}
+.who b{display:block;font-size:.82rem;color:var(--ocean)}
+.flight{font-size:.92rem}
+.flight .row{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed var(--line);padding:6px 0}
+.flight .row span:first-child{color:var(--muted)}
+.vote{display:flex;align-items:center;gap:10px;margin-top:16px;flex-wrap:wrap}
+.vote button{font:inherit;font-weight:700;border:none;background:var(--coral);color:#fff;border-radius:999px;padding:9px 16px;cursor:pointer}
+.vote .hearts{font-size:1.1rem;letter-spacing:2px}
+
+/* TABLE */
+.tablewrap{overflow-x:auto;background:#fff;border-radius:20px;border:1px solid var(--line);box-shadow:0 10px 40px rgba(30,40,50,.06)}
+table{border-collapse:collapse;width:100%;min-width:980px;font-size:.92rem}
+th,td{padding:13px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--ink);color:#fff;font-weight:600;font-size:.82rem;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;white-space:nowrap;position:sticky;top:0}
+th:hover{background:#2c3e4a}
+th .arr{opacity:.5;font-size:.7rem;margin-left:4px}
+tbody tr:hover{background:var(--sand)}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+td .best{display:inline-block;background:#e3f3e9;color:var(--leaf);font-weight:700;font-size:.72rem;padding:2px 7px;border-radius:999px;margin-left:4px}
+td .warn{display:inline-block;background:#fde8e2;color:var(--coral);font-weight:700;font-size:.72rem;padding:2px 7px;border-radius:999px;margin-left:4px}
+.stars{color:var(--sun);letter-spacing:1px}
+.dname{font-weight:700;font-family:Fraunces,serif;font-size:1.05rem}
+
+/* VERDICT */
+.verdict{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+.vcard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}
+.vcard .k{font-size:.78rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700}
+.vcard h3{font-size:1.5rem;margin:6px 0}
+.vcard p{margin:0;color:var(--muted);font-size:.93rem}
+
+.note{font-size:.85rem;color:var(--muted);background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:20px}
+.note b{color:var(--ink)}
+footer{padding:30px 0 60px;color:var(--muted);font-size:.82rem}
+footer a{color:var(--muted)}
+
+@media (max-width:900px){
+  .strip{grid-template-columns:repeat(5,70%);overflow-x:auto}
+  .dest-head{grid-template-columns:1fr}
+  .gallery{min-height:300px}
+  .dest-body{grid-template-columns:1fr;padding:0 20px 24px}
+  .info{padding:22px 20px}
+  .verdict{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="bg" id="heroBg"></div>
+  <div class="wrap">
+    <span class="eyebrow">🎄 Propuesta de viaje familiar · Navidad 2026</span>
+    <h1>Esta Navidad,<br>con los pies en la arena.</h1>
+    <p class="lead">Cinco destinos de playa desde Córdoba, con máximo una escala, para Javier, Marina, Rafa y Balta. Del sábado 19 al domingo 27 de diciembre: 9 días y 8 noches.</p>
+    <div class="facts">
+      <div class="fact"><b>4 viajeros</b>2 adultos · 14 y 8 años</div>
+      <div class="fact"><b>19 → 27 dic</b>8 noches</div>
+      <div class="fact"><b>US$ 5.000</b>presupuesto objetivo</div>
+      <div class="fact"><b class="count" id="countdown">–</b>días para salir</div>
+    </div>
+  </div>
+</header>
+
+<nav class="nav"><div class="wrap" id="navLinks">
+  <a href="#destinos">Destinos</a>
+  <span class="sp"></span>
+  <a href="#comparar">Tabla comparativa ↓</a>
+</div></nav>
+
+<section id="destinos">
+  <div class="wrap">
+    <div class="sec-title">
+      <div>
+        <h2>Las cinco opciones</h2>
+        <p>Precios reales para nuestras fechas, consultados el 10/11/2026. Tocá una foto para verla en grande.</p>
+      </div>
+      <div class="chips" id="filters">
+        <button class="chip on" data-f="all">Todas</button>
+        <button class="chip" data-f="budget">Dentro de US$ 5.000</button>
+        <button class="chip" data-f="direct">Vuelo directo</button>
+        <button class="chip" data-f="ai">Todo incluido</button>
+      </div>
+    </div>
+    <div class="strip" id="strip"></div>
+    <div id="cards" style="margin-top:34px"></div>
+  </div>
+</section>
+
+<section id="comparar" style="background:var(--sand2)">
+  <div class="wrap">
+    <div class="sec-title">
+      <div>
+        <h2>Tabla comparativa</h2>
+        <p>Tocá el título de una columna para ordenar. Valores en dólares, para los 4.</p>
+      </div>
+    </div>
+    <div class="tablewrap"><table id="cmp"><thead></thead><tbody></tbody></table></div>
+
+    <div class="verdict" id="verdict"></div>
+
+    <div class="note">
+      <b>Cómo leer los números.</b> “Paquete” = vuelos ida y vuelta para los 4 (Google Vuelos, tarifa más baja con máximo 1 escala) + hotel 8 noches para 2 adultos y 2 chicos (Booking, tarifa más baja disponible al 10/11). “Costo real” suma una estimación propia de comidas fuera del hotel (≈ US$ 100–120 por día para los 4) en los hoteles sin todo incluido, y ≈ US$ 400 de valijas despachadas en las aerolíneas low cost (Arajet, JetSMART). Los menores pagan prácticamente tarifa de adulto en estas rutas. Los precios cambian todos los días en temporada alta: conviene reservar rápido y pedir cotización de paquete a una agencia para comparar.
+      <br><br>
+      <b>Documentos.</b> Brasil: alcanza con DNI tarjeta vigente; viajando con ambos padres conviene llevar las partidas de nacimiento de los chicos. República Dominicana: pasaporte vigente para los 4 y el formulario e-Ticket migratorio online antes de volar.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><b>Fuentes:</b>
+      <a href="https://www.google.com/travel/flights">Google Vuelos</a> (tarifas COR → NAT, MCZ, REC, PUJ, FLN para 19–27/12/2026) ·
+      <a href="https://www.booking.com/hotel/br/serhs-natal-grand-natal.es-ar.html">Serhs Natal Grand Hotel</a> ·
+      <a href="https://www.booking.com/hotel/br/jatiuca-resort.es-ar.html">Jatiúca Hotel &amp; Resort</a> ·
+      <a href="https://www.booking.com/hotel/br/enotel-resort-spa-porto-de-galinhas.es-ar.html">Enotel Porto de Galinhas</a> ·
+      <a href="https://www.booking.com/hotel/do/barcelo-bavaro-palace-deluxe.es-ar.html">Barceló Bávaro Palace</a> ·
+      <a href="https://www.booking.com/hotel/br/il-campanario-villagio-resort.es-ar.html">IL Campanario Villaggio Resort</a> ·
+      <a href="https://www.booking.com/hotel/br/apart-monteiro.es-ar.html">Pousada Roberto Monteiro</a>.
+      Fotos de hoteles: Booking.com. Fotos de playas: Wikimedia Commons.</p>
+  </div>
+</footer>
+
+<script>
+const BK=(size,id,k)=>`https://cf.bstatic.com/xdata/images/hotel/${size}/${id}.jpg?k=${k}&o=`;
+const WM=(f)=>`https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(f)}?width=1280`;
+const BUDGET=5000, MAXBAR=11000;
+
+const D=[
+{
+ id:"natal", name:"Natal", where:"Rio Grande do Norte · Brasil", tag:"Mejor precio/calidad",
+ pitch:"Dunas gigantes, agua tibia y sol asegurado. Natal combina playa urbana con excursiones de película: buggy por las dunas de Genipabu, delfines en Pipa y piletas naturales en Maracajaú. Es la opción que mejor cae en el presupuesto.",
+ hotels:[{key:"s",label:"Serhs Natal Grand Hotel",stars:5,score:"8,9 · 2.964 opiniones",regime:"Alojamiento (desayuno según tarifa)",hotel:1992,
+   note:"Frente al mar en la Via Costeira, piscina infinita y spa. Opción con departamento familiar vista al mar: US$ 2.108."}],
+ flight:{air:"GOL", stops:"1 escala en Río (1 h 45 min)", time:"Sale 02:45 · llega 10:45 (8 h)", pp:767},
+ direct:false, ai:false, meals:800, bags:0,
+ weather:"≈ 30 °C, poca lluvia; agua ≈ 27 °C",
+ photos:[
+   {src:WM("Morro do Careca Natal.jpg"),cap:"Ponta Negra y el Morro do Careca"},
+   {src:BK("max1024x768","722176231","2cd4833a37c3357edb5cf58a8710c78d2310a793a94a1b2cc6c5ce4f2970f42d"),cap:"Serhs Natal Grand Hotel"},
+   {src:WM("Genipabu Dunes in Natal, Brazil.jpg"),cap:"Dunas de Genipabu"},
+   {src:BK("max500","538159128","1d3297d018d997d5a626dd80d2fb6efd0b8b860fd2b30e0d2f340d64f5eb0fdf"),cap:"Serhs Natal Grand Hotel"},
+   {src:WM("Praia do Amor, Pipa, Brazil.jpg"),cap:"Praia do Amor, Pipa"},
+   {src:BK("max500","538159837","1d51fc83a4fe44693353889b7f86cafa589b0be0f0efdc9f1a8a2ade66cc0488"),cap:"Serhs Natal Grand Hotel"}
+ ],
+ todo:["Buggy por las dunas de Genipabu (con o sin “emoção”)","Día en Pipa: Praia do Amor y bahía de los delfines","Snorkel en las piletas naturales de Maracajaú","Atardecer en Ponta Negra con el Morro do Careca"],
+ who:{Javier:"Precio que cierra y hotel 5★ frente al mar.",Marina:"Spa, piscina infinita y playa sin moverse del hotel.",Rafael:"Buggy a toda velocidad por las dunas y sandboard.",Baltazar:"Delfines en Pipa y peces en las piletas naturales."},
+ cons:"Escala corta en Río (ojo con demoras). Comidas aparte."
+},
+{
+ id:"maceio", name:"Maceió", where:"Alagoas · Brasil", tag:"El Caribe brasileño",
+ pitch:"El agua más turquesa de Brasil. Desde Maceió se va en jangada a las piletas naturales de Pajuçara y en una excursión de día a las Galés de Maragogi, que parecen de postal. El Jatiúca es un resort frente al mar con jardines y laguna, ideal para chicos.",
+ hotels:[{key:"j",label:"Jatiúca Hotel & Resort",stars:5,score:"9,1 · 961 opiniones",regime:"Alojamiento (desayuno según tarifa)",hotel:3270,
+   note:"Resort frente a la playa de Jatiúca, con laguna, piletas y club infantil."}],
+ flight:{air:"LATAM", stops:"1 escala en São Paulo (7 h 40 min)", time:"Sale 03:00 · llega 16:35 (13 h 35 min)", pp:862},
+ direct:false, ai:false, meals:800, bags:0,
+ weather:"≈ 30 °C, temporada seca; agua ≈ 27 °C",
+ photos:[
+   {src:WM("Maragogi - Alagoas (1).jpg"),cap:"Maragogi"},
+   {src:BK("max1024x768","219080863","fa48b994d4409987385750a253906664949cf6990853055e90ad94f085687468"),cap:"Jatiúca Hotel & Resort"},
+   {src:WM("Jangadas em Pajuçara - Maceió. (6791553397).jpg"),cap:"Jangadas en Pajuçara"},
+   {src:BK("max500","929613757","b9cc8d648b3560f9a611f352653c6f5d0a147a2a4e4f0d642434a30dc22b9853"),cap:"Jatiúca Hotel & Resort"},
+   {src:WM("Praia do Camacho (51724228245).jpg"),cap:"Praia do Camacho"},
+   {src:BK("max500","219080615","f60f76c26cf367941cb9bda9e806cef8c5818e8907e05c59e5a7ffb45f75534a"),cap:"Jatiúca Hotel & Resort"}
+ ],
+ todo:["Jangada a las piletas naturales de Pajuçara","Excursión a las Galés de Maragogi","Praia do Gunga y Praia do Francês","Paseo por la costanera de Ponta Verde"],
+ who:{Javier:"Resort mejor puntuado de la lista (9,1).",Marina:"Agua turquesa y calma, jardines y laguna.",Rafael:"Snorkel en Maragogi, las fotos más lindas del viaje.",Baltazar:"Club infantil y piletas naturales con peces."},
+ cons:"Escala larga en São Paulo. Se pasa del presupuesto ≈ US$ 1.700."
+},
+{
+ id:"porto", name:"Porto de Galinhas", where:"Pernambuco · Brasil", tag:"Todo incluido en Brasil",
+ pitch:"Elegida muchas veces como la mejor playa de Brasil: piletas naturales llenas de peces a pasos de la orilla. El Enotel es todo incluido, así que no hay que pensar en comidas ni en la cena de Nochebuena.",
+ hotels:[{key:"e",label:"Enotel Porto de Galinhas",stars:5,score:"7,8 · 760 opiniones",regime:"Todo incluido",hotel:5584,
+   note:"Resort todo incluido en Muro Alto, con muchas piscinas y playa de aguas calmas."}],
+ flight:{air:"LATAM a Recife", stops:"1 escala en São Paulo (2 h 55 min) + 1 h en auto", time:"Sale 03:00 · llega 12:00 (9 h)", pp:1110},
+ direct:false, ai:true, meals:0, bags:0,
+ weather:"≈ 30 °C, temporada seca; agua ≈ 27 °C",
+ photos:[
+   {src:WM("Porto de Galinhas piscinas naturais.jpg"),cap:"Piletas naturales de Porto de Galinhas"},
+   {src:BK("max1024x768","389503783","15344c3bc0808980b34e5693a1796f17fdccb6f32972cb62c1013f1f14a9333a"),cap:"Enotel Porto de Galinhas"},
+   {src:WM("Praia de Muro alto - Porto de Galinhas - Pernambuco - 01.jpg"),cap:"Praia de Muro Alto"},
+   {src:BK("max500","622987461","e33a3d702328fcc04bb68b6d89b396e36b6778486d94523936f098db0f902495"),cap:"Enotel Porto de Galinhas"},
+   {src:BK("max500","622987140","27ca7975fcc861148a8c71f4a0999eddc81240600270477cd54ba729095ea916"),cap:"Enotel Porto de Galinhas"}
+ ],
+ todo:["Piletas naturales en jangada (con marea baja)","Praia dos Carneiros y su iglesita sobre la arena","Buggy a Maracaípe para ver caballitos de mar","Pileta y playa sin salir del resort"],
+ who:{Javier:"Todo resuelto, cero cuentas durante el viaje.",Marina:"Cena de Navidad incluida, nada que organizar.",Rafael:"Snorkel entre peces a metros de la orilla.",Baltazar:"Caballitos de mar en Maracaípe."},
+ cons:"La más cara (≈ el doble del presupuesto). Puntaje del hotel más bajo."
+},
+{
+ id:"punta", name:"Punta Cana", where:"República Dominicana", tag:"Directo + todo incluido",
+ pitch:"El único destino con vuelo directo y todo incluido: 7 h 30 min y aterrizamos en el Caribe. Arena blanca, mar turquesa y un resort enorme frente a playa Bávaro. Sumando lo que se ahorra en comidas, queda casi igual que Maceió.",
+ hotels:[{key:"b",label:"Barceló Bávaro Palace",stars:5,score:"8,0 · 1.018 opiniones",regime:"Todo incluido",hotel:3757,
+   note:"Resort todo incluido sobre playa Bávaro, con muchos restaurantes, piletas y club infantil."}],
+ flight:{air:"Arajet", stops:"Directo", time:"Sale 01:29 · llega 07:59 (7 h 30 min)", pp:807},
+ direct:true, ai:true, meals:0, bags:400,
+ weather:"≈ 29 °C, inicio de temporada seca; agua ≈ 27 °C",
+ photos:[
+   {src:WM("Bavaro Beach 045.jpg"),cap:"Playa Bávaro"},
+   {src:BK("max1024x768","449977828","ef14fa2e3a2476feca7d61b3d6246b9138a4609375354908bd0740281db43377"),cap:"Barceló Bávaro Palace"},
+   {src:WM("Saona Island December 2020.jpg"),cap:"Isla Saona"},
+   {src:BK("max500","17740300","6891b2bd3d1bb3d4c176c89fea9df39111110c88420f2183c367e7144ac89708"),cap:"Barceló Bávaro Palace"},
+   {src:BK("max500","17799173","eb0f4102297e09e6da8a10359228240fbde63ae0886376627ea044c39e4008c1"),cap:"Barceló Bávaro Palace"}
+ ],
+ todo:["Excursión a Isla Saona en catamarán","Playa Bávaro sin salir del hotel","Parques de aventura y cenotes (Hoyo Azul)","Navidad y cena especial en el resort"],
+ who:{Javier:"Vuelo directo: sin escalas ni conexiones.",Marina:"Todo incluido y playa caribeña de postal.",Rafael:"Catamarán a Saona y deportes acuáticos.",Baltazar:"Club infantil, piletas y playa todo el día."},
+ cons:"Necesita pasaporte. Arajet es low cost: valija despachada aparte (incluida en el costo real)."
+},
+{
+ id:"floripa", name:"Florianópolis", where:"Santa Catarina · Brasil", tag:"Directo y el más barato",
+ pitch:"La isla de las 42 playas, a solo 2 h 37 min de vuelo directo. Jurerê tiene aguas calmas ideales para chicos, y a 2 horas está Beto Carrero World, el parque temático más grande de Latinoamérica. Hay versión económica muy por debajo del presupuesto.",
+ hotels:[
+   {key:"c",label:"IL Campanario Villaggio Resort",stars:5,score:"8,2 · 996 opiniones",regime:"Alojamiento",hotel:5309,
+     note:"Resort en Jurerê Internacional, a pasos de la playa, con piletas y departamentos amplios."},
+   {key:"m",label:"Pousada Roberto Monteiro",stars:3,score:"8,7 · 451 opiniones",regime:"Alojamiento",hotel:1329,
+     note:"Frente al mar en Canasvieiras, sencilla y bien puntuada. Opción para ahorrar."}],
+ flight:{air:"JetSMART", stops:"Directo", time:"Sale 15:28 · llega 18:05 (2 h 37 min)", pp:389},
+ direct:true, ai:false, meals:950, bags:400,
+ weather:"≈ 27 °C, algo más lluvioso; agua ≈ 22 °C",
+ photos:[
+   {src:WM("Praia de Jurerê Internacional.JPG"),cap:"Jurerê Internacional"},
+   {src:BK("max1024x768","215086923","d322f1f2e7eecf85f1f47693efc59f0979316728314c8aba758c4eef77bd993d"),cap:"IL Campanario Villaggio Resort"},
+   {src:WM("Campeche praia.jpg"),cap:"Praia do Campeche"},
+   {src:BK("max500","215087973","a2114c22103904416bff4a8f0c5788f22aca01eb5428f87f2578dbee94e81387"),cap:"IL Campanario Villaggio Resort"},
+   {src:BK("max500","886229450","3a866974ec8c1be8e124f17eff39befbf0b34349b48829de1f3adf57895e8ac1"),cap:"IL Campanario Villaggio Resort"}
+ ],
+ todo:["Día en Beto Carrero World (≈ 2 h)","Sandboard en las dunas de Joaquina","Barco a la Isla do Campeche","Lagoa da Conceição al atardecer"],
+ who:{Javier:"El vuelo más corto y la versión que más ahorra.",Marina:"Playas tranquilas y buena gastronomía.",Rafael:"Sandboard en Joaquina y montaña rusa en Beto Carrero.",Baltazar:"Beto Carrero World: el día soñado."},
+ cons:"Agua más fría y más chance de lluvia. Resort de Jurerê caro en Navidad."
+}
+];
+
+D.forEach(d=>{d.sel=0});
+const fmt=n=>"US$ "+n.toLocaleString("es-AR");
+const calc=d=>{const h=d.hotels[d.sel]; const fl=d.flight.pp*4; const pkg=fl+h.hotel; return {h,fl,pkg,real:pkg+d.meals+d.bags}};
+
+/* hero + countdown */
+document.getElementById("heroBg").style.backgroundImage=`url("${WM("Bavaro Beach 045.jpg")}")`;
+(function(){const t=new Date("2026-12-19T00:00:00-03:00"); const d=Math.max(0,Math.ceil((t-new Date())/864e5)); document.getElementById("countdown").textContent=d;})();
+
+/* votes */
+let votes={}; try{votes=JSON.parse(localStorage.getItem("votosNavidad")||"{}")}catch(e){}
+const saveVotes=()=>{try{localStorage.setItem("votosNavidad",JSON.stringify(votes))}catch(e){}};
+
+function strip(){
+  document.getElementById("strip").innerHTML=D.map(d=>{const c=calc(d);return `
+  <a class="mini" href="#${d.id}" data-id="${d.id}">
+    <img src="${d.photos[0].src}" alt="${d.name}" loading="lazy" onerror="this.style.display='none'">
+    <span class="tag">${d.tag}</span>
+    <div class="cap"><b>${d.name}</b><span>${fmt(c.pkg)} · ${d.flight.stops.startsWith("Directo")?"directo":"1 escala"}</span></div>
+  </a>`}).join("");
+}
+
+function card(d){
+  const c=calc(d); const pct=Math.min(100,c.pkg/MAXBAR*100); const mk=BUDGET/MAXBAR*100;
+  const diff=c.pkg-BUDGET;
+  const barColor=diff<=0?"var(--leaf)":(diff<1500?"var(--sun)":"var(--coral)");
+  const pills=[d.flight.stops.startsWith("Directo")?'<span class="pill o">✈ Directo</span>':'<span class="pill">1 escala</span>',
+    d.ai?'<span class="pill g">Todo incluido</span>':'',
+    c.pkg<=BUDGET?'<span class="pill s">Dentro del presupuesto</span>':''].join("");
+  const v=votes[d.id]||0;
+  return `
+  <div class="dest-head">
+    <div class="gallery">
+      <img class="main" src="${d.photos[0].src}" alt="${d.photos[0].cap}" onerror="this.style.opacity=0">
+      <div class="badge">${pills}</div>
+      <span class="photo-cap">${d.photos[0].cap}</span>
+      <div class="thumbs">${d.photos.map((p,i)=>`<button class="${i?'':'on'}" data-i="${i}" aria-label="${p.cap}"><img src="${p.src}" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></button>`).join("")}</div>
+    </div>
+    <div class="info">
+      <div class="where">${d.where}</div>
+      <h3>${d.name}</h3>
+      <div class="hotel">${c.h.label} <span class="stars">${"★".repeat(c.h.stars)}</span><br><small>Booking ${c.h.score} · ${c.h.regime}</small></div>
+      <p class="pitch">${d.pitch}</p>
+      ${d.hotels.length>1?`<div class="toggle">${d.hotels.map((h,i)=>`<button data-h="${i}" class="${i===d.sel?'on':''}">${h.label}</button>`).join("")}</div>`:""}
+      <div class="price">
+        <div class="total">${fmt(c.pkg)} <small>vuelos + hotel, los 4</small></div>
+        <div class="break"><span>✈ ${fmt(c.fl)} (${fmt(d.flight.pp)} c/u)</span><span>🏨 ${fmt(c.h.hotel)} · 8 noches</span></div>
+        <div class="bar"><i style="width:${pct}%;background:${barColor}"></i><span class="mark" style="left:${mk}%"></span></div>
+        <div class="bar-legend"><span>Presupuesto US$ 5.000 ▲</span><span class="${diff<=0?'under':'over'}">${diff<=0?'Sobran '+fmt(-diff):'Se pasa '+fmt(diff)}</span></div>
+      </div>
+      <div class="vote"><button data-vote="${d.id}">❤ Me gusta este</button><span class="hearts">${"❤".repeat(v)||'<span style="color:var(--muted);font-size:.85rem">Todavía sin votos</span>'}</span></div>
+    </div>
+  </div>
+  <div class="dest-body">
+    <div class="box"><h4>Qué vamos a hacer</h4><ul>${d.todo.map(t=>`<li>${t}</li>`).join("")}</ul>
+      <p style="font-size:.88rem;color:var(--muted);margin:10px 0 0">${c.h.note}</p></div>
+    <div class="box"><h4>Para cada uno</h4><div class="who">${Object.entries(d.who).map(([k,t])=>`<div><b>${k}</b>${t}</div>`).join("")}</div></div>
+    <div class="box flight"><h4>Viaje y datos</h4>
+      <div class="row"><span>Aerolínea</span><span>${d.flight.air}</span></div>
+      <div class="row"><span>Ruta</span><span>${d.flight.stops}</span></div>
+      <div class="row"><span>Ida 19/12</span><span>${d.flight.time}</span></div>
+      <div class="row"><span>Clima</span><span>${d.weather}</span></div>
+      <div class="row"><span>A tener en cuenta</span><span style="text-align:right">${d.cons}</span></div>
+    </div>
+  </div>`;
+}
+
+function renderCards(){
+  const box=document.getElementById("cards");
+  box.innerHTML=D.map(d=>`<article class="dest" id="${d.id}">${card(d)}</article>`).join("");
+  bindCards(); applyFilter();
+}
+function rerender(id){
+  const d=D.find(x=>x.id===id); const el=document.getElementById(id); el.innerHTML=card(d); bindCard(el,d);
+  strip(); table(); verdict();
+}
+function bindCards(){D.forEach(d=>bindCard(document.getElementById(d.id),d))}
+function bindCard(el,d){
+  const main=el.querySelector(".main"), cap=el.querySelector(".photo-cap");
+  el.querySelectorAll(".thumbs button").forEach(b=>b.onclick=()=>{
+    const p=d.photos[+b.dataset.i]; main.style.opacity=0;
+    setTimeout(()=>{main.src=p.src; main.style.opacity=1; cap.textContent=p.cap},180);
+    el.querySelectorAll(".thumbs button").forEach(x=>x.classList.toggle("on",x===b));
+  });
+  el.querySelectorAll(".toggle button").forEach(b=>b.onclick=()=>{d.sel=+b.dataset.h; rerender(d.id)});
+  const vb=el.querySelector("[data-vote]"); if(vb) vb.onclick=()=>{votes[d.id]=(votes[d.id]||0)+1; saveVotes(); rerender(d.id)};
+}
+
+let filter="all";
+function applyFilter(){
+  D.forEach(d=>{const c=calc(d); let ok=true;
+    if(filter==="budget") ok=c.pkg<=BUDGET;
+    if(filter==="direct") ok=d.direct;
+    if(filter==="ai") ok=d.ai;
+    document.getElementById(d.id).classList.toggle("hidden",!ok);
+    const m=document.querySelector(`.mini[data-id="${d.id}"]`); if(m) m.style.opacity=ok?1:.3;
+  });
+}
+document.querySelectorAll("#filters .chip").forEach(b=>b.onclick=()=>{
+  filter=b.dataset.f; document.querySelectorAll("#filters .chip").forEach(x=>x.classList.toggle("on",x===b)); applyFilter();
+});
+
+/* TABLE */
+const COLS=[
+ {k:"name",t:"Destino"},{k:"hotel",t:"Hotel"},{k:"regime",t:"Régimen"},{k:"score",t:"Puntaje"},
+ {k:"route",t:"Vuelo"},{k:"dur",t:"Horas de viaje"},{k:"fl",t:"Vuelos (4)"},{k:"ht",t:"Hotel (8 n)"},
+ {k:"pkg",t:"Paquete"},{k:"real",t:"Costo real*"},{k:"vs",t:"vs. US$ 5.000"},{k:"water",t:"Agua"},{k:"doc",t:"Documento"}
+];
+let sortK="pkg", sortDir=1;
+function rows(){return D.map(d=>{const c=calc(d);const dur={natal:8,maceio:13.6,porto:10,punta:7.5,floripa:2.6}[d.id];
+  return {id:d.id,name:d.name,hotel:c.h.label,stars:c.h.stars,regime:c.h.regime.startsWith("Todo")?"Todo incluido":"Solo alojamiento",
+   score:parseFloat(c.h.score.replace(",",".")),route:d.flight.air+" · "+(d.direct?"directo":"1 escala"),dur,
+   fl:c.fl,ht:c.h.hotel,pkg:c.pkg,real:c.real,vs:c.pkg-BUDGET,water:parseInt(d.weather.split("agua ≈ ")[1]),doc:d.id==="punta"?"Pasaporte":"DNI"}})}
+function table(){
+  const r=rows().sort((a,b)=>{const x=a[sortK],y=b[sortK];return (typeof x==="string"?x.localeCompare(y):x-y)*sortDir});
+  const min=k=>Math.min(...r.map(x=>x[k])), max=k=>Math.max(...r.map(x=>x[k]));
+  document.querySelector("#cmp thead").innerHTML="<tr>"+COLS.map(c=>`<th data-k="${c.k}">${c.t}<span class="arr">${sortK===c.k?(sortDir>0?"▲":"▼"):"⇅"}</span></th>`).join("")+"</tr>";
+  document.querySelector("#cmp tbody").innerHTML=r.map(x=>`<tr>
+    <td><a class="dname" href="#${x.id}" style="color:inherit;text-decoration:none">${x.name}</a></td>
+    <td>${x.hotel}<br><span class="stars">${"★".repeat(x.stars)}</span></td>
+    <td>${x.regime}${x.regime==="Todo incluido"?'<span class="best">comidas incl.</span>':''}</td>
+    <td class="num">${x.score.toFixed(1).replace(".",",")}${x.score===max("score")?'<span class="best">mejor</span>':''}</td>
+    <td>${x.route}</td>
+    <td class="num">${x.dur.toString().replace(".",",")} h${x.dur===min("dur")?'<span class="best">más corto</span>':''}</td>
+    <td class="num">${fmt(x.fl)}</td>
+    <td class="num">${fmt(x.ht)}</td>
+    <td class="num"><b>${fmt(x.pkg)}</b>${x.pkg===min("pkg")?'<span class="best">más barato</span>':''}</td>
+    <td class="num">${fmt(x.real)}</td>
+    <td class="num">${x.vs<=0?'<span class="under">−'+fmt(-x.vs).replace("US$ ","US$ ")+'</span>':'<span class="over">+'+fmt(x.vs)+'</span>'}</td>
+    <td class="num">${x.water} °C${x.water<25?'<span class="warn">más fría</span>':''}</td>
+    <td>${x.doc}</td></tr>`).join("");
+  document.querySelectorAll("#cmp th").forEach(th=>th.onclick=()=>{const k=th.dataset.k; sortDir=(sortK===k)?-sortDir:1; sortK=k; table();});
+}
+function verdict(){
+  const n=D.find(d=>d.id==="natal"), p=D.find(d=>d.id==="punta"), f=D.find(d=>d.id==="floripa");
+  document.getElementById("verdict").innerHTML=`
+   <div class="vcard"><div class="k">🏆 Mejor relación precio/calidad</div><h3>Natal</h3><p>${fmt(calc(n).pkg)} con hotel 5★ frente al mar: prácticamente en el presupuesto, con nordeste brasileño, agua tibia y excursiones para los 4.</p></div>
+   <div class="vcard"><div class="k">✨ Si estiramos el presupuesto</div><h3>Punta Cana</h3><p>${fmt(calc(p).pkg)}, pero directo y todo incluido: contando comidas, cuesta casi lo mismo que Maceió y es el viaje más cómodo.</p></div>
+   <div class="vcard"><div class="k">💰 Para ahorrar</div><h3>Florianópolis</h3><p>Desde ${fmt(f.flight.pp*4+f.hotels[1].hotel)} con la pousada frente al mar, 2 h 37 min de vuelo y Beto Carrero de bonus. Agua más fría.</p></div>`;
+}
+
+strip(); renderCards(); table(); verdict();
+</script>
+</body>
+</html>
