@@ -317,15 +317,18 @@
   if(q.get("invitacion")||q.get("empresa")||q.get("codigo")){ location.replace("/invitacion.html"+location.search); }
 })();
 /* Botones de descarga con origen medible (UTM) en Google Play.
-   Publicada en Google Play el 15/10/2026. En iPhone los botones siguen yendo a
-   /proximamente.html hasta que salga en el App Store.
+   Publicada en Google Play el 15/10/2026 y en el App Store el 10/11/2026.
+   En iPhone los botones van al App Store; en el resto, a Google Play.
    Ej.: el link de la bio de Instagram es https://www.fixgo.ar/?utm_source=instagram&utm_medium=bio
    y Play Console muestra esas instalaciones como "instagram / bio". */
 document.addEventListener("DOMContentLoaded",function(){
   var PLAY_PUBLICO=true;
   if(!PLAY_PUBLICO) return;
   var esIphone=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
-  if(esIphone) return;
+  if(esIphone){
+    document.querySelectorAll('a[href="/proximamente.html"]').forEach(function(a){ a.href="https://apps.apple.com/ar/app/fixgo/id6817560350"; });
+    return;
+  }
   var q=new URLSearchParams(location.search);
   var ref="utm_source="+(q.get("utm_source")||"web")+"&utm_medium="+(q.get("utm_medium")||"landing")+"&utm_campaign="+(q.get("utm_campaign")||"organico");
   var play="https://play.google.com/store/apps/details?id=ar.fixgo.app&referrer="+encodeURIComponent(ref);
@@ -374,7 +377,7 @@ document.addEventListener("DOMContentLoaded",function(){
       </div>
       <p class="hero-note mono">
         <svg width="15" height="15"><use href="#ic-phone"/></svg>
-        Ya en Android · Muy pronto en iPhone
+        Disponible en Android y iPhone
       </p>
     </div>
     <div class="hero-visual">
@@ -505,7 +508,7 @@ document.addEventListener("DOMContentLoaded",function(){
   <div class="wrap">
     <p class="kicker" style="text-align:center;">Planes</p>
     <h2 class="section-title" style="text-align:center;">Empezá gratis, escalá cuando lo necesites</h2>
-    <p class="section-lead" style="text-align:center; margin-left:auto; margin-right:auto;">Se descarga gratis en Android. Muy pronto en iPhone.</p>
+    <p class="section-lead" style="text-align:center; margin-left:auto; margin-right:auto;">Se descarga gratis en Android y iPhone.</p>
     <div class="pricing">
       <div class="plan">
         <h3>Gratuito</h3>
@@ -536,7 +539,7 @@ document.addEventListener("DOMContentLoaded",function(){
 
 <section class="cta-final">
   <h2>¿Tu obra o tu edificio ya tiene este problema?</h2>
-  <p>Descargala gratis y cargá tu primera obra hoy. Ya en Android, muy pronto en iPhone.</p>
+  <p>Descargala gratis y cargá tu primera obra hoy. Disponible en Android y iPhone.</p>
   <a class="btn btn-primary" href="/proximamente.html">Quiero probarla</a>
 </section>
 
